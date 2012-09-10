@@ -34,6 +34,9 @@ public class SignalExternalWorkflowExecutionInitiatedEventAttributesJsonUnmarsha
 
     public SignalExternalWorkflowExecutionInitiatedEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         SignalExternalWorkflowExecutionInitiatedEventAttributes signalExternalWorkflowExecutionInitiatedEventAttributes = new SignalExternalWorkflowExecutionInitiatedEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class SignalExternalWorkflowExecutionInitiatedEventAttributesJsonUnmarsha
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return signalExternalWorkflowExecutionInitiatedEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("workflowId", targetDepth)) {
                     context.nextToken();
@@ -69,12 +73,14 @@ public class SignalExternalWorkflowExecutionInitiatedEventAttributesJsonUnmarsha
                     signalExternalWorkflowExecutionInitiatedEventAttributes.setControl(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return signalExternalWorkflowExecutionInitiatedEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return signalExternalWorkflowExecutionInitiatedEventAttributes;
     }
 
     private static SignalExternalWorkflowExecutionInitiatedEventAttributesJsonUnmarshaller instance;

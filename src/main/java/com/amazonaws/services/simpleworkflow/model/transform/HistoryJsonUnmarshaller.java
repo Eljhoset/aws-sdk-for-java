@@ -34,6 +34,9 @@ public class HistoryJsonUnmarshaller implements Unmarshaller<History, JsonUnmars
 
     public History unmarshall(JsonUnmarshallerContext context) throws Exception {
         History history = new History();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class HistoryJsonUnmarshaller implements Unmarshaller<History, JsonUnmars
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return history;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("events", targetDepth)) {
                     history.setEvents(new ListUnmarshaller<HistoryEvent>(HistoryEventJsonUnmarshaller.getInstance()).unmarshall(context));
@@ -52,12 +56,14 @@ public class HistoryJsonUnmarshaller implements Unmarshaller<History, JsonUnmars
                     history.setNextPageToken(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return history;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return history;
     }
 
     private static HistoryJsonUnmarshaller instance;

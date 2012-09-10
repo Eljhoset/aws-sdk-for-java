@@ -21,6 +21,7 @@ import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
@@ -183,11 +184,10 @@ public class SimpleTypeJsonUnmarshallers {
             if (dateString == null) return null;
 
             try {
-            	Number number = DecimalFormat.getInstance().parse(dateString);
+            	Number number = DecimalFormat.getInstance(new Locale("en")).parse(dateString);
             	return new Date(number.longValue() * 1000);
             } catch (ParseException e) {
                 String errorMessage = "Unable to parse date '" + dateString + "':  " + e.getMessage();
-				log.error(errorMessage, e);
                 throw new AmazonClientException(errorMessage, e);
             }
         }

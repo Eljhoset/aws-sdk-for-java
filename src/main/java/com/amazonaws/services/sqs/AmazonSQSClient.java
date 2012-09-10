@@ -43,26 +43,18 @@ import com.amazonaws.services.sqs.model.transform.*;
  * completes.
  * <p>
  * Amazon Simple Queue Service <p>
- * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly
- * scalable, hosted queue for storing messages as they travel between
- * computers. By using Amazon SQS, developers can simply move data
- * between distributed components of their applications that perform
- * different tasks, without losing messages or requiring each component
- * to be always available. Amazon SQS makes it easy to build an automated
- * workflow, working in close conjunction with the Amazon Elastic Compute
- * Cloud (Amazon EC2) and the other AWS infrastructure web services.
+ * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly scalable, hosted queue for storing messages as they travel between computers. By
+ * using Amazon SQS, developers can simply move data between distributed components of their applications that perform different tasks, without losing
+ * messages or requiring each component to be always available. Amazon SQS makes it easy to build an automated workflow, working in close conjunction
+ * with the Amazon Elastic Compute Cloud (Amazon EC2) and the other AWS infrastructure web services.
  * </p>
  * <p>
- * Amazon SQS works by exposing Amazon's web-scale messaging
- * infrastructure as a web service. Any computer on the Internet can add
- * or read messages without any installed software or special firewall
- * configurations. Components of applications using Amazon SQS can run
- * independently, and do not need to be on the same network, developed
- * with the same technologies, or running at the same time.
+ * Amazon SQS works by exposing Amazon's web-scale messaging infrastructure as a web service. Any computer on the Internet can add or read messages
+ * without any installed software or special firewall configurations. Components of applications using Amazon SQS can run independently, and do not need
+ * to be on the same network, developed with the same technologies, or running at the same time.
  * </p>
  * <p>
- * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/
- * </a> for more information.
+ * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/ </a> for more information.
  * </p>
  */
 public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS {
@@ -75,11 +67,55 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
     private QueryStringSigner signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSQS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSQSClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSQS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonSQS
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSQSClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -116,7 +152,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials provider.
@@ -125,7 +161,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -142,7 +178,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -155,7 +191,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new QueueDeletedRecentlyExceptionUnmarshaller());
         exceptionUnmarshallers.add(new QueueNameExistsExceptionUnmarshaller());
         exceptionUnmarshallers.add(new EmptyBatchRequestExceptionUnmarshaller());
@@ -175,12 +211,13 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
         setEndpoint("queue.amazonaws.com");
 
         signer = new QueryStringSigner();
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/sqs/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -733,7 +770,6 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
     }
     
 
-
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
      * debugging issues where a service isn't acting as expected.  This data isn't considered part
@@ -760,7 +796,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -772,7 +808,7 @@ public class AmazonSQSClient extends AmazonWebServiceClient implements AmazonSQS
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#copyDBSnapshot(CopyDBSnapshotRequest) CopyDBSnapshot operation}.
  * <p>
- * Copies the specified DBSnapshot. The source DBSnapshot must be in the
- * "available" state.
+ * Copies the specified DBSnapshot. The source DBSnapshot must be in the "available" state.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#copyDBSnapshot(CopyDBSnapshotRequest)
@@ -28,9 +27,9 @@ public class CopyDBSnapshotRequest extends AmazonWebServiceRequest {
 
     /**
      * The identifier for the source DB snapshot. <p>Constraints: <ul>
-     * <li>Must be the identifier for a valid automated snapshot in the
+     * <li>Must be the identifier for a valid system snapshot in the
      * "available" state.</li> </ul> <p>Example:
-     * <code>rds:mydb-2012-01-15-00-01</code>
+     * <code>rds:mydb-2012-04-02-00-01</code>
      */
     private String sourceDBSnapshotIdentifier;
 
@@ -45,14 +44,14 @@ public class CopyDBSnapshotRequest extends AmazonWebServiceRequest {
 
     /**
      * The identifier for the source DB snapshot. <p>Constraints: <ul>
-     * <li>Must be the identifier for a valid automated snapshot in the
+     * <li>Must be the identifier for a valid system snapshot in the
      * "available" state.</li> </ul> <p>Example:
-     * <code>rds:mydb-2012-01-15-00-01</code>
+     * <code>rds:mydb-2012-04-02-00-01</code>
      *
      * @return The identifier for the source DB snapshot. <p>Constraints: <ul>
-     *         <li>Must be the identifier for a valid automated snapshot in the
+     *         <li>Must be the identifier for a valid system snapshot in the
      *         "available" state.</li> </ul> <p>Example:
-     *         <code>rds:mydb-2012-01-15-00-01</code>
+     *         <code>rds:mydb-2012-04-02-00-01</code>
      */
     public String getSourceDBSnapshotIdentifier() {
         return sourceDBSnapshotIdentifier;
@@ -60,14 +59,14 @@ public class CopyDBSnapshotRequest extends AmazonWebServiceRequest {
     
     /**
      * The identifier for the source DB snapshot. <p>Constraints: <ul>
-     * <li>Must be the identifier for a valid automated snapshot in the
+     * <li>Must be the identifier for a valid system snapshot in the
      * "available" state.</li> </ul> <p>Example:
-     * <code>rds:mydb-2012-01-15-00-01</code>
+     * <code>rds:mydb-2012-04-02-00-01</code>
      *
      * @param sourceDBSnapshotIdentifier The identifier for the source DB snapshot. <p>Constraints: <ul>
-     *         <li>Must be the identifier for a valid automated snapshot in the
+     *         <li>Must be the identifier for a valid system snapshot in the
      *         "available" state.</li> </ul> <p>Example:
-     *         <code>rds:mydb-2012-01-15-00-01</code>
+     *         <code>rds:mydb-2012-04-02-00-01</code>
      */
     public void setSourceDBSnapshotIdentifier(String sourceDBSnapshotIdentifier) {
         this.sourceDBSnapshotIdentifier = sourceDBSnapshotIdentifier;
@@ -75,16 +74,16 @@ public class CopyDBSnapshotRequest extends AmazonWebServiceRequest {
     
     /**
      * The identifier for the source DB snapshot. <p>Constraints: <ul>
-     * <li>Must be the identifier for a valid automated snapshot in the
+     * <li>Must be the identifier for a valid system snapshot in the
      * "available" state.</li> </ul> <p>Example:
-     * <code>rds:mydb-2012-01-15-00-01</code>
+     * <code>rds:mydb-2012-04-02-00-01</code>
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param sourceDBSnapshotIdentifier The identifier for the source DB snapshot. <p>Constraints: <ul>
-     *         <li>Must be the identifier for a valid automated snapshot in the
+     *         <li>Must be the identifier for a valid system snapshot in the
      *         "available" state.</li> </ul> <p>Example:
-     *         <code>rds:mydb-2012-01-15-00-01</code>
+     *         <code>rds:mydb-2012-04-02-00-01</code>
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 

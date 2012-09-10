@@ -43,50 +43,32 @@ import com.amazonaws.services.sns.model.transform.*;
  * completes.
  * <p>
  * Amazon Simple Notification Service <p>
- * This is the <i>Amazon Simple Notification Service (Amazon SNS) API
- * Reference</i> . This guide provides detailed information about Amazon
- * SNS actions, data types, parameters, and errors. For detailed
- * information about Amazon SNS features and their associated API calls,
- * go to the <a href="http://docs.amazonwebservices.com/sns/latest/gsg/">
- * Amazon SNS Getting Started Guide </a> .
+ * This is the <i>Amazon Simple Notification Service (Amazon SNS) API Reference</i> . This guide provides detailed information about Amazon SNS actions,
+ * data types, parameters, and errors. For detailed information about Amazon SNS features and their associated API calls, go to the <a
+ * href="http://docs.amazonwebservices.com/sns/latest/gsg/"> Amazon SNS Getting Started Guide </a> .
  * </p>
  * <p>
- * Amazon Simple Notification Service is a web service that enables you
- * to build distributed web-enabled applications. Applications can use
- * Amazon SNS to easily push real-time notification messages to
- * interested subscribers over multiple delivery protocols. For more
- * information about this product go to <a
- * href="http://aws.amazon.com/sns/"> http://aws.amazon.com/sns </a> .
+ * Amazon Simple Notification Service is a web service that enables you to build distributed web-enabled applications. Applications can use Amazon SNS to
+ * easily push real-time notification messages to interested subscribers over multiple delivery protocols. For more information about this product go to
+ * <a href="http://aws.amazon.com/sns/"> http://aws.amazon.com/sns </a> .
  * </p>
  * <p>
- * Use the following links to get started using the <i>Amazon Simple
- * Notification Service API Reference</i> :
+ * Use the following links to get started using the <i>Amazon Simple Notification Service API Reference</i> :
  * </p>
  * 
  * <ul>
- * <li> <a
- * http://docs.amazonwebservices.com/sns/latest/api/API_Operations.html">
- * Actions </a> : An alphabetical list of all Amazon SNS actions.</li>
- * <li> <a
- * ref="http://docs.amazonwebservices.com/sns/latest/api/API_Types.html">
- * Data Types </a> : An alphabetical list of all Amazon SNS data
+ * <li> <a href="http://docs.amazonwebservices.com/sns/latest/api/API_Operations.html"> Actions </a> : An alphabetical list of all Amazon SNS
+ * actions.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/sns/latest/api/API_Types.html"> Data Types </a> : An alphabetical list of all Amazon SNS data
  * types.</li>
- * <li> <a
- * tp://docs.amazonwebservices.com/sns/latest/api/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
+ * <li> <a href="http://docs.amazonwebservices.com/sns/latest/api/CommonParameters.html"> Common Parameters </a> : Parameters that all Query actions can
  * use.</li>
- * <li> <a
- * ="http://docs.amazonwebservices.com/sns/latest/api/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
+ * <li> <a href="http://docs.amazonwebservices.com/sns/latest/api/CommonErrors.html"> Common Errors </a> : Client and server errors that all actions can
  * return.</li>
- * <li> <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> : Itemized regions and endpoints for all
- * AWS products.</li>
- * <li> <a
- * s-east-1.amazonaws.com/doc/2010-03-31/SimpleNotificationService.wsdl">
- * WSDL Location </a> :
- * ast-1.amazonaws.com/doc/2010-03-31/SimpleNotificationService.wsdl</li>
+ * <li> <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html"> Regions and Endpoints </a> : Itemized regions and endpoints
+ * for all AWS products.</li>
+ * <li> <a href="http://sns.us-east-1.amazonaws.com/doc/2010-03-31/SimpleNotificationService.wsdl"> WSDL Location </a> :
+ * http://sns.us-east-1.amazonaws.com/doc/2010-03-31/SimpleNotificationService.wsdl</li>
  * 
  * </ul>
  */
@@ -100,11 +82,55 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
     private QueryStringSigner signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSNS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSNSClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonSNS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonSNS
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSNSClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -141,7 +167,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AmazonSNS using the specified AWS account credentials provider.
@@ -150,7 +176,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -167,7 +193,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -180,7 +206,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new AuthorizationErrorExceptionUnmarshaller());
         exceptionUnmarshallers.add(new TopicLimitExceededExceptionUnmarshaller());
         exceptionUnmarshallers.add(new NotFoundExceptionUnmarshaller());
@@ -192,12 +218,13 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
         setEndpoint("sns.us-east-1.amazonaws.com");
 
         signer = new QueryStringSigner();
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/sns/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -739,7 +766,6 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
     }
     
 
-
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
      * debugging issues where a service isn't acting as expected.  This data isn't considered part
@@ -766,7 +792,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -778,7 +804,7 @@ public class AmazonSNSClient extends AmazonWebServiceClient implements AmazonSNS
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

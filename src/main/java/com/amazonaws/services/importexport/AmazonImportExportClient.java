@@ -43,13 +43,9 @@ import com.amazonaws.services.importexport.model.transform.*;
  * completes.
  * <p>
  * AWS Import/Export Service <p>
- * AWS Import/Export accelerates transferring large amounts of data
- * between the AWS cloud and portable storage devices that you mail to
- * us. AWS Import/Export transfers data directly onto and off of your
- * storage devices using Amazon's high-speed internal network and
- * bypassing the Internet. For large data sets, AWS Import/Export is
- * often faster than Internet transfer and more cost effective than
- * upgrading your connectivity.
+ * AWS Import/Export accelerates transferring large amounts of data between the AWS cloud and portable storage devices that you mail to us. AWS
+ * Import/Export transfers data directly onto and off of your storage devices using Amazon's high-speed internal network and bypassing the Internet. For
+ * large data sets, AWS Import/Export is often faster than Internet transfer and more cost effective than upgrading your connectivity.
  * </p>
  */
 public class AmazonImportExportClient extends AmazonWebServiceClient implements AmazonImportExport {
@@ -62,11 +58,55 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
     private QueryStringSigner signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonImportExport.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonImportExportClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonImportExport.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonImportExport
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonImportExportClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -103,7 +143,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AmazonImportExport using the specified AWS account credentials provider.
@@ -112,7 +152,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -129,7 +169,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -142,7 +182,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new BucketPermissionExceptionUnmarshaller());
         exceptionUnmarshallers.add(new InvalidFileSystemExceptionUnmarshaller());
         exceptionUnmarshallers.add(new MissingCustomsExceptionUnmarshaller());
@@ -165,12 +205,13 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
         setEndpoint("importexport.amazonaws.com");
 
         signer = new QueryStringSigner();
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/importexport/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -387,7 +428,6 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
     }
     
 
-
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
      * debugging issues where a service isn't acting as expected.  This data isn't considered part
@@ -414,7 +454,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -426,7 +466,7 @@ public class AmazonImportExportClient extends AmazonWebServiceClient implements 
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

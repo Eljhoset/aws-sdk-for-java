@@ -38,51 +38,66 @@ public class CreateInvalidationRequestMarshaller implements Marshaller<Request<C
 
     public Request<CreateInvalidationRequest> marshall(CreateInvalidationRequest createInvalidationRequest) {
         if (createInvalidationRequest == null) {
-		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
-		}
+            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+        }
 
         Request<CreateInvalidationRequest> request = new DefaultRequest<CreateInvalidationRequest>(createInvalidationRequest, "AmazonCloudFront");
-        request.setHttpMethod(HttpMethodName.POST);        
+        request.setHttpMethod(HttpMethodName.POST);
 
-        String uriResourcePath = "2010-11-01/distribution/{DistributionId}/invalidation"; 
+        String uriResourcePath = "2012-05-05/distribution/{DistributionId}/invalidation"; 
         uriResourcePath = uriResourcePath.replace("{DistributionId}", getString(createInvalidationRequest.getDistributionId())); 
-	    
+
         if (uriResourcePath.contains("?")) {
-	        String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
-	        uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
-	
-	        for (String s : queryString.split("&")) {
-	            String[] nameValuePair = s.split("=");
-	            if (nameValuePair.length == 2) {
-	                request.addParameter(nameValuePair[0], nameValuePair[1]);
-	            }
-	        }
+            String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
+            uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
+
+            for (String s : queryString.split("[;&]")) {
+                String[] nameValuePair = s.split("=");
+                if (nameValuePair.length == 2) {
+                    request.addParameter(nameValuePair[0], nameValuePair[1]);
+                } else {
+                    request.addParameter(s, null);
+                }
+            }
         }
-	    
+
         request.setResourcePath(uriResourcePath);
 
-        	            
-	        StringWriter stringWriter = new StringWriter();
-	        XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2010-11-01/");
+        
+            StringWriter stringWriter = new StringWriter();
+            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2012-05-05/");
 
-			        if (createInvalidationRequest != null) {
+            
+                    if (createInvalidationRequest != null) {
             InvalidationBatch invalidationBatchInvalidationBatch = createInvalidationRequest.getInvalidationBatch();
             if (invalidationBatchInvalidationBatch != null) {
                 xmlWriter.startElement("InvalidationBatch");
-
                 if (invalidationBatchInvalidationBatch != null) {
-                    java.util.List<String> pathsList = invalidationBatchInvalidationBatch.getPaths();
-                    if (pathsList != null && pathsList.size() > 0) {
-                        int pathsListIndex = 1;
-                        for (String pathsListValue : pathsList) {
-
-                        xmlWriter.startElement("Path");
-                            xmlWriter.value(pathsListValue);
-                        xmlWriter.endElement();
-
-
-                            pathsListIndex++;
+                    Paths pathsPaths = invalidationBatchInvalidationBatch.getPaths();
+                    if (pathsPaths != null) {
+                        xmlWriter.startElement("Paths");
+                        if (pathsPaths.getQuantity() != null) {
+                            xmlWriter.startElement("Quantity").value(pathsPaths.getQuantity()).endElement();
                         }
+
+                        if (pathsPaths != null) {
+                            java.util.List<String> pathsPathsitemsList = pathsPaths.getItems();
+                            if (pathsPathsitemsList != null && pathsPathsitemsList.size() > 0) {
+                                int pathsPathsitemsListIndex = 1;
+                                xmlWriter.startElement("Items");
+                                for (String pathsPathsitemsListValue : pathsPathsitemsList) {
+
+                                xmlWriter.startElement("Path");
+                                    xmlWriter.value(pathsPathsitemsListValue);
+                                xmlWriter.endElement();
+
+
+                                    pathsPathsitemsListIndex++;
+                                }
+                                xmlWriter.endElement();
+                            }
+                        }
+                        xmlWriter.endElement();
                     }
                 }
                 if (invalidationBatchInvalidationBatch.getCallerReference() != null) {
@@ -92,19 +107,19 @@ public class CreateInvalidationRequestMarshaller implements Marshaller<Request<C
             }
         }
 
-	
-	        try {
-	            request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
-	            request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
-	            request.addHeader("Content-Type", "application/xml");
-	        } catch (UnsupportedEncodingException e) {
-	            throw new AmazonClientException("Unable to marshall request to XML", e);
-	        }
-		
+
+            try {
+                request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
+                request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
+                request.addHeader("Content-Type", "application/xml");
+            } catch (UnsupportedEncodingException e) {
+                throw new AmazonClientException("Unable to marshall request to XML", e);
+            }
+        
 
         return request;
     }
-    
+
     private String getString(String s) {
         if (s == null) return "";
         return s;

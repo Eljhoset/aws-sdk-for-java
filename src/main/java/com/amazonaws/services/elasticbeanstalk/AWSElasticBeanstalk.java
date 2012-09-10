@@ -21,23 +21,17 @@ import com.amazonaws.services.elasticbeanstalk.model.*;
 /**
  * Interface for accessing AWSElasticBeanstalk.
  * AWS Elastic Beanstalk <p>
- * This is the AWS Elastic Beanstalk API Reference. This guide provides
- * detailed information about AWS Elastic Beanstalk actions, data types,
+ * This is the AWS Elastic Beanstalk API Reference. This guide provides detailed information about AWS Elastic Beanstalk actions, data types,
  * parameters, and errors.
  * </p>
  * <p>
- * AWS Elastic Beanstalk is a tool that makes it easy for you to create,
- * deploy, and manage scalable, fault-tolerant applications running on
- * Amazon Web Services cloud resources.
+ * AWS Elastic Beanstalk is a tool that makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on Amazon Web
+ * Services cloud resources.
  * </p>
  * <p>
- * For more information about this product, go to the <a
- * href="http://aws.amazon.com/elasticbeanstalk/"> AWS Elastic Beanstalk
- * </a> details page. The location of the lastest AWS Elastic Beanstalk
- * WSDL is <a
- * icbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">
- * sticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl
- * </a> .
+ * For more information about this product, go to the <a href="http://aws.amazon.com/elasticbeanstalk/"> AWS Elastic Beanstalk </a> details page. The
+ * location of the lastest AWS Elastic Beanstalk WSDL is <a href="http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">
+ * http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl </a> .
  * </p>
  * <p>
  * <b>Endpoints</b>
@@ -57,8 +51,8 @@ public interface AWSElasticBeanstalk {
      * Overrides the default endpoint for this client ("https://elasticbeanstalk.us-east-1.amazonaws.com").
      * Callers can use this method to control which AWS region they want to work with.
      * <p>
-     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
-     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * Callers can pass in just the endpoint (ex: "elasticbeanstalk.us-east-1.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://elasticbeanstalk.us-east-1.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
@@ -68,8 +62,8 @@ public interface AWSElasticBeanstalk {
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
      *
      * @param endpoint
-     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
-     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            The endpoint (ex: "elasticbeanstalk.us-east-1.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://elasticbeanstalk.us-east-1.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
      *

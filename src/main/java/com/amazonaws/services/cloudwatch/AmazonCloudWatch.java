@@ -21,49 +21,30 @@ import com.amazonaws.services.cloudwatch.model.*;
 /**
  * Interface for accessing AmazonCloudWatch.
  * Amazon CloudWatch <p>
- * This is the <i>Amazon CloudWatch API Reference</i> . This guide
- * provides detailed information about Amazon CloudWatch actions, data
- * types, parameters, and errors. For detailed information about Amazon
- * CloudWatch features and their associated API calls, go to the <a
- * ://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide">
- * Amazon CloudWatch Developer Guide </a> .
+ * This is the <i>Amazon CloudWatch API Reference</i> . This guide provides detailed information about Amazon CloudWatch actions, data types, parameters,
+ * and errors. For detailed information about Amazon CloudWatch features and their associated API calls, go to the <a
+ * href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide"> Amazon CloudWatch Developer Guide </a> .
  * </p>
  * <p>
- * Amazon CloudWatch is a web service that enables you to publish,
- * monitor, and manage various metrics, as well as configure alarm
- * actions based on data from metrics. For more information about this
- * product go to <a href="http://aws.amazon.com/cloudwatch">
- * http://aws.amazon.com/cloudwatch </a> .
+ * Amazon CloudWatch is a web service that enables you to publish, monitor, and manage various metrics, as well as configure alarm actions based on data
+ * from metrics. For more information about this product go to <a href="http://aws.amazon.com/cloudwatch"> http://aws.amazon.com/cloudwatch </a> .
  * </p>
  * <p>
- * Use the following links to get started using the <i>Amazon CloudWatch
- * API Reference</i> :
+ * Use the following links to get started using the <i>Amazon CloudWatch API Reference</i> :
  * </p>
  * 
  * <ul>
- * <li> <a
- * ervices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html">
- * Actions </a> : An alphabetical list of all Amazon CloudWatch
- * actions.</li>
- * <li> <a
- * nwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html">
- * Data Types </a> : An alphabetical list of all Amazon CloudWatch data
- * types.</li>
- * <li> <a
- * vices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
- * use.</li>
- * <li> <a
- * bservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
- * return.</li>
- * <li> <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> : Itemized regions and endpoints for all
- * AWS products.</li>
- * <li> <a
- * href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl">
- * WSDL Location </a> :
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html"> Actions </a> : An alphabetical list of all
+ * Amazon CloudWatch actions.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html"> Data Types </a> : An alphabetical list of all
+ * Amazon CloudWatch data types.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html"> Common Parameters </a> : Parameters that
+ * all Query actions can use.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html"> Common Errors </a> : Client and server
+ * errors that all actions can return.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html"> Regions and Endpoints </a> : Itemized regions and endpoints
+ * for all AWS products.</li>
+ * <li> <a href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl"> WSDL Location </a> :
  * http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl</li>
  * 
  * </ul>
@@ -74,8 +55,8 @@ public interface AmazonCloudWatch {
      * Overrides the default endpoint for this client ("https://monitoring.amazonaws.com").
      * Callers can use this method to control which AWS region they want to work with.
      * <p>
-     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
-     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * Callers can pass in just the endpoint (ex: "monitoring.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://monitoring.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
@@ -85,8 +66,8 @@ public interface AmazonCloudWatch {
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
      *
      * @param endpoint
-     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
-     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            The endpoint (ex: "monitoring.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://monitoring.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
      *

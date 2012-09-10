@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.services.sqs;
-            
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +24,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 
 import com.amazonaws.services.sqs.model.*;
 
@@ -34,51 +35,87 @@ import com.amazonaws.services.sqs.model.*;
  * Callers must use the Future object to determine when the service call has actually
  * completed.
  * Amazon Simple Queue Service <p>
- * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly
- * scalable, hosted queue for storing messages as they travel between
- * computers. By using Amazon SQS, developers can simply move data
- * between distributed components of their applications that perform
- * different tasks, without losing messages or requiring each component
- * to be always available. Amazon SQS makes it easy to build an automated
- * workflow, working in close conjunction with the Amazon Elastic Compute
- * Cloud (Amazon EC2) and the other AWS infrastructure web services.
+ * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly scalable, hosted queue for storing messages as they travel between computers. By
+ * using Amazon SQS, developers can simply move data between distributed components of their applications that perform different tasks, without losing
+ * messages or requiring each component to be always available. Amazon SQS makes it easy to build an automated workflow, working in close conjunction
+ * with the Amazon Elastic Compute Cloud (Amazon EC2) and the other AWS infrastructure web services.
  * </p>
  * <p>
- * Amazon SQS works by exposing Amazon's web-scale messaging
- * infrastructure as a web service. Any computer on the Internet can add
- * or read messages without any installed software or special firewall
- * configurations. Components of applications using Amazon SQS can run
- * independently, and do not need to be on the same network, developed
- * with the same technologies, or running at the same time.
+ * Amazon SQS works by exposing Amazon's web-scale messaging infrastructure as a web service. Any computer on the Internet can add or read messages
+ * without any installed software or special firewall configurations. Components of applications using Amazon SQS can run independently, and do not need
+ * to be on the same network, developed with the same technologies, or running at the same time.
  * </p>
  * <p>
- * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/
- * </a> for more information.
- * </p> 
- */       
+ * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/ </a> for more information.
+ * </p>
+ */
 public class AmazonSQSAsyncClient extends AmazonSQSClient
-        implements AmazonSQSAsync { 
+        implements AmazonSQSAsync {
 
     /**
      * Executor service for executing asynchronous requests.
      */
     private ExecutorService executorService;
 
-    
+
     /**
-     * Constructs a new asynchronous client to invoke service methods on 
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonSQS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSQSAsyncClient() {
+        this(new DefaultAWSCredentialsProviderChain());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonSQS.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonSQS
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonSQSAsyncClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration, Executors.newCachedThreadPool());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials.
-     * Default client settings will be used, and a default cached thread pool will be 
+     * Default client settings will be used, and a default cached thread pool will be
      * created for executing the asynchronous tasks.
      *
      * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
+     *
      * @param awsCredentials The AWS credentials (access key ID and secret key) to use
      *                       when authenticating with AWS services.
-     */                                      
+     */
     public AmazonSQSAsyncClient(AWSCredentials awsCredentials) {
         this(awsCredentials, Executors.newCachedThreadPool());
     }
@@ -87,13 +124,13 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials
      * and executor service.  Default client settings will be used.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param executorService
@@ -104,18 +141,18 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
         super(awsCredentials);
         this.executorService = executorService;
     }
-     
+
     /**
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials,
      * executor service, and client configuration options.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param clientConfiguration
@@ -132,35 +169,35 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
     }
 
     /**
-     * Constructs a new asynchronous client to invoke service methods on 
+     * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials provider.
-     * Default client settings will be used, and a default cached thread pool will be 
+     * Default client settings will be used, and a default cached thread pool will be
      * created for executing the asynchronous tasks.
      *
      * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
-     */                                      
+     */
     public AmazonSQSAsyncClient(AWSCredentialsProvider awsCredentialsProvider) {
         this(awsCredentialsProvider, Executors.newCachedThreadPool());
     }
-    
+
     /**
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials provider
      * and executor service.  Default client settings will be used.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param executorService
@@ -175,13 +212,13 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonSQS using the specified AWS account credentials
      * provider, executor service, and client configuration options.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration
@@ -191,7 +228,7 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
      *            The executor service by which all asynchronous requests will
      *            be executed.
      */
-    public AmazonSQSAsyncClient(AWSCredentialsProvider awsCredentialsProvider, 
+    public AmazonSQSAsyncClient(AWSCredentialsProvider awsCredentialsProvider,
                 ClientConfiguration clientConfiguration, ExecutorService executorService) {
         super(awsCredentialsProvider, clientConfiguration);
         this.executorService = executorService;
@@ -201,14 +238,14 @@ public class AmazonSQSAsyncClient extends AmazonSQSClient
     /**
      * Returns the executor service used by this async client to execute
      * requests.
-     *   
+     *
      * @return The executor service used by this async client to execute
      *         requests.
      */
     public ExecutorService getExecutorService() {
         return executorService;
     }
-    
+
     /**
      * Shuts down the client, releasing all managed resources. This includes
      * forcibly terminating all pending asynchronous service calls. Clients who

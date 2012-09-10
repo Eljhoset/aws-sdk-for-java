@@ -18,8 +18,7 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStacks(DescribeStacksRequest) DescribeStacks operation}.
  * <p>
- * Returns the description for the specified stack; if no stack name was
- * specified, then it returns the description for all the stacks created.
+ * Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.
  * </p>
  *
  * @see com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStacks(DescribeStacksRequest)
@@ -27,47 +26,92 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DescribeStacksRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      */
     private String stackName;
 
+    private String nextToken;
+
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @return The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @return The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public String getStackName() {
         return stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @param stackName The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public void setStackName(String stackName) {
         this.stackName = stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param stackName The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
      */
     public DescribeStacksRequest withStackName(String stackName) {
         this.stackName = stackName;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the NextToken property for this object.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Length: </b>1 - 1024<br/>
+     *
+     * @return The value of the NextToken property for this object.
+     */
+    public String getNextToken() {
+        return nextToken;
+    }
+    
+    /**
+     * Sets the value of the NextToken property for this object.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Length: </b>1 - 1024<br/>
+     *
+     * @param nextToken The new value for the NextToken property for this object.
+     */
+    public void setNextToken(String nextToken) {
+        this.nextToken = nextToken;
+    }
+    
+    /**
+     * Sets the value of the NextToken property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     * <p>
+     * <b>Constraints:</b><br/>
+     * <b>Length: </b>1 - 1024<br/>
+     *
+     * @param nextToken The new value for the NextToken property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DescribeStacksRequest withNextToken(String nextToken) {
+        this.nextToken = nextToken;
         return this;
     }
     
@@ -85,6 +129,7 @@ public class DescribeStacksRequest extends AmazonWebServiceRequest {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
         if (stackName != null) sb.append("StackName: " + stackName + ", ");
+        if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -95,6 +140,7 @@ public class DescribeStacksRequest extends AmazonWebServiceRequest {
         int hashCode = 1;
         
         hashCode = prime * hashCode + ((getStackName() == null) ? 0 : getStackName().hashCode()); 
+        hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
         return hashCode;
     }
     
@@ -108,6 +154,8 @@ public class DescribeStacksRequest extends AmazonWebServiceRequest {
         
         if (other.getStackName() == null ^ this.getStackName() == null) return false;
         if (other.getStackName() != null && other.getStackName().equals(this.getStackName()) == false) return false; 
+        if (other.getNextToken() == null ^ this.getNextToken() == null) return false;
+        if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
         return true;
     }
     

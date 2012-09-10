@@ -34,6 +34,9 @@ public class WorkflowExecutionCanceledEventAttributesJsonUnmarshaller implements
 
     public WorkflowExecutionCanceledEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         WorkflowExecutionCanceledEventAttributes workflowExecutionCanceledEventAttributes = new WorkflowExecutionCanceledEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class WorkflowExecutionCanceledEventAttributesJsonUnmarshaller implements
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return workflowExecutionCanceledEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("details", targetDepth)) {
                     context.nextToken();
@@ -53,12 +57,14 @@ public class WorkflowExecutionCanceledEventAttributesJsonUnmarshaller implements
                     workflowExecutionCanceledEventAttributes.setDecisionTaskCompletedEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return workflowExecutionCanceledEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return workflowExecutionCanceledEventAttributes;
     }
 
     private static WorkflowExecutionCanceledEventAttributesJsonUnmarshaller instance;

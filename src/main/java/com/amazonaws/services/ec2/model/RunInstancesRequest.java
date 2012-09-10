@@ -21,53 +21,35 @@ import com.amazonaws.AmazonWebServiceRequest;
  * The RunInstances operation launches a specified number of instances.
  * </p>
  * <p>
- * If Amazon EC2 cannot launch the minimum number AMIs you request, no
- * instances launch. If there is insufficient capacity to launch the
- * maximum number of AMIs you request, Amazon EC2 launches as many as
- * possible to satisfy the requested maximum values.
+ * If Amazon EC2 cannot launch the minimum number AMIs you request, no instances launch. If there is insufficient capacity to launch the maximum number
+ * of AMIs you request, Amazon EC2 launches as many as possible to satisfy the requested maximum values.
  * </p>
  * <p>
- * Every instance is launched in a security group. If you do not specify
- * a security group at launch, the instances start in your default
- * security group. For more information on creating security groups, see
- * CreateSecurityGroup.
+ * Every instance is launched in a security group. If you do not specify a security group at launch, the instances start in your default security group.
+ * For more information on creating security groups, see CreateSecurityGroup.
  * </p>
  * <p>
- * An optional instance type can be specified. For information about
- * instance types, see Instance Types.
+ * An optional instance type can be specified. For information about instance types, see Instance Types.
  * </p>
  * <p>
- * You can provide an optional key pair ID for each image in the launch
- * request (for more information, see CreateKeyPair). All instances that
- * are created from images that use this key pair will have access to the
- * associated public key at boot. You can use this key to provide secure
- * access to an instance of an image on a per-instance basis. Amazon EC2
- * public images use this feature to provide secure access without
- * passwords.
+ * You can provide an optional key pair ID for each image in the launch request (for more information, see CreateKeyPair). All instances that are
+ * created from images that use this key pair will have access to the associated public key at boot. You can use this key to provide secure access to an
+ * instance of an image on a per-instance basis. Amazon EC2 public images use this feature to provide secure access without passwords.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> Launching public images without a key pair ID will
- * leave them inaccessible. The public key material is made available to
- * the instance at boot time by placing it in the openssh_id.pub file on
- * a logical device that is exposed to the instance as /dev/sda2 (the
- * ephemeral store). The format of this file is suitable for use as an
- * entry within ~/.ssh/authorized_keys (the OpenSSH format). This can be
- * done at boot (e.g., as part of rc.local) allowing for secure access
- * without passwords. Optional user data can be provided in the launch
- * request. All instances that collectively comprise the launch request
- * have access to this data For more information, see Instance Metadata.
+ * <b>IMPORTANT:</b> Launching public images without a key pair ID will leave them inaccessible. The public key material is made available to the
+ * instance at boot time by placing it in the openssh_id.pub file on a logical device that is exposed to the instance as /dev/sda2 (the ephemeral store).
+ * The format of this file is suitable for use as an entry within ~/.ssh/authorized_keys (the OpenSSH format). This can be done at boot (e.g., as part of
+ * rc.local) allowing for secure access without passwords. Optional user data can be provided in the launch request. All instances that collectively
+ * comprise the launch request have access to this data For more information, see Instance Metadata.
  * </p>
  * <p>
- * <b>NOTE:</b> If any of the AMIs have a product code attached for which
- * the user has not subscribed, the RunInstances call will fail.
+ * <b>NOTE:</b> If any of the AMIs have a product code attached for which the user has not subscribed, the RunInstances call will fail.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> We strongly recommend using the 2.6.18 Xen stock
- * kernel with the c1.medium and c1.xlarge instances. Although the
- * default Amazon EC2 kernels will work, the new kernels provide greater
- * stability and performance for these instance types. For more
- * information about kernels, see Kernels, RAM Disks, and Block Device
- * Mappings.
+ * <b>IMPORTANT:</b> We strongly recommend using the 2.6.18 Xen stock kernel with the c1.medium and c1.xlarge instances. Although the default Amazon EC2
+ * kernels will work, the new kernels provide greater stability and performance for these instance types. For more information about kernels, see
+ * Kernels, RAM Disks, and Block Device Mappings.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#runInstances(RunInstancesRequest)
@@ -117,7 +99,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      */
     private String instanceType;
 
@@ -194,6 +176,10 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
     private String additionalInfo;
 
     private java.util.List<InstanceNetworkInterfaceSpecification> networkInterfaces;
+
+    private IamInstanceProfileSpecification iamInstanceProfile;
+
+    private Boolean ebsOptimized;
 
     /**
      * Default constructor for a new RunInstancesRequest object.  Callers should use the
@@ -601,7 +587,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @return Specifies the instance type for the launched instances.
      *
@@ -615,7 +601,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -631,7 +617,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -650,7 +636,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Specifies the instance type for the launched instances.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -666,7 +652,7 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
+     * <b>Allowed Values: </b>t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, c1.medium, c1.xlarge, hi1.4xlarge, cc1.4xlarge, cc2.8xlarge, cg1.4xlarge
      *
      * @param instanceType Specifies the instance type for the launched instances.
      *
@@ -1307,6 +1293,83 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
     }
     
     /**
+     * Returns the value of the IamInstanceProfile property for this object.
+     *
+     * @return The value of the IamInstanceProfile property for this object.
+     */
+    public IamInstanceProfileSpecification getIamInstanceProfile() {
+        return iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     */
+    public void setIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+    }
+    
+    /**
+     * Sets the value of the IamInstanceProfile property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param iamInstanceProfile The new value for the IamInstanceProfile property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withIamInstanceProfile(IamInstanceProfileSpecification iamInstanceProfile) {
+        this.iamInstanceProfile = iamInstanceProfile;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the EbsOptimized property for this object.
+     *
+     * @return The value of the EbsOptimized property for this object.
+     */
+    public Boolean isEbsOptimized() {
+        return ebsOptimized;
+    }
+    
+    /**
+     * Sets the value of the EbsOptimized property for this object.
+     *
+     * @param ebsOptimized The new value for the EbsOptimized property for this object.
+     */
+    public void setEbsOptimized(Boolean ebsOptimized) {
+        this.ebsOptimized = ebsOptimized;
+    }
+    
+    /**
+     * Sets the value of the EbsOptimized property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param ebsOptimized The new value for the EbsOptimized property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public RunInstancesRequest withEbsOptimized(Boolean ebsOptimized) {
+        this.ebsOptimized = ebsOptimized;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the EbsOptimized property for this object.
+     *
+     * @return The value of the EbsOptimized property for this object.
+     */
+    public Boolean getEbsOptimized() {
+        return ebsOptimized;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -1340,6 +1403,8 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
         if (clientToken != null) sb.append("ClientToken: " + clientToken + ", ");
         if (additionalInfo != null) sb.append("AdditionalInfo: " + additionalInfo + ", ");
         if (networkInterfaces != null) sb.append("NetworkInterfaces: " + networkInterfaces + ", ");
+        if (iamInstanceProfile != null) sb.append("IamInstanceProfile: " + iamInstanceProfile + ", ");
+        if (ebsOptimized != null) sb.append("EbsOptimized: " + ebsOptimized + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -1371,6 +1436,8 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
         hashCode = prime * hashCode + ((getClientToken() == null) ? 0 : getClientToken().hashCode()); 
         hashCode = prime * hashCode + ((getAdditionalInfo() == null) ? 0 : getAdditionalInfo().hashCode()); 
         hashCode = prime * hashCode + ((getNetworkInterfaces() == null) ? 0 : getNetworkInterfaces().hashCode()); 
+        hashCode = prime * hashCode + ((getIamInstanceProfile() == null) ? 0 : getIamInstanceProfile().hashCode()); 
+        hashCode = prime * hashCode + ((isEbsOptimized() == null) ? 0 : isEbsOptimized().hashCode()); 
         return hashCode;
     }
     
@@ -1426,6 +1493,10 @@ public class RunInstancesRequest extends AmazonWebServiceRequest {
         if (other.getAdditionalInfo() != null && other.getAdditionalInfo().equals(this.getAdditionalInfo()) == false) return false; 
         if (other.getNetworkInterfaces() == null ^ this.getNetworkInterfaces() == null) return false;
         if (other.getNetworkInterfaces() != null && other.getNetworkInterfaces().equals(this.getNetworkInterfaces()) == false) return false; 
+        if (other.getIamInstanceProfile() == null ^ this.getIamInstanceProfile() == null) return false;
+        if (other.getIamInstanceProfile() != null && other.getIamInstanceProfile().equals(this.getIamInstanceProfile()) == false) return false; 
+        if (other.isEbsOptimized() == null ^ this.isEbsOptimized() == null) return false;
+        if (other.isEbsOptimized() != null && other.isEbsOptimized().equals(this.isEbsOptimized()) == false) return false; 
         return true;
     }
     

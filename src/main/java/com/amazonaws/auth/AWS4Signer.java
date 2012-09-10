@@ -14,6 +14,8 @@
  */
 package com.amazonaws.auth;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,7 +91,17 @@ public class AWS4Signer extends AbstractAWSSigner {
         String dateTime  = dateTimeFormat.format(date);
         String dateStamp = dateStampFormat.format(date);
 
+        InputStream payloadStream = getBinaryRequestPayloadStream(request);
+        payloadStream.mark(-1);
+		String contentSha256 = BinaryUtils.toHex(hash(payloadStream));
+		try {
+			payloadStream.reset();
+		} catch (IOException e) {
+			throw new AmazonClientException("Unable to reset stream after calculating AWS4 signature", e);
+		}
+		
         request.addHeader("X-Amz-Date", dateTime);
+		request.addHeader("x-amz-content-sha256", contentSha256);
 
         String canonicalRequest =
             request.getHttpMethod().toString() + "\n" +
@@ -97,7 +109,7 @@ public class AWS4Signer extends AbstractAWSSigner {
             getCanonicalizedQueryString(request) + "\n" +
             getCanonicalizedHeaderString(request) + "\n" +
             getSignedHeadersString(request) + "\n" +
-            BinaryUtils.toHex(hash(getRequestPayload(request)));
+            contentSha256;
 
         log.debug("AWS4 Canonical Request: '\"" + canonicalRequest + "\"");
 
@@ -119,8 +131,6 @@ public class AWS4Signer extends AbstractAWSSigner {
 
         byte[] signature = sign(stringToSign.getBytes(), kSigning, SigningAlgorithm.HmacSHA256);
 
-        String signatureAlgorithmHeader =
-            "Algorithm=" + ALGORITHM;
         String credentialsAuthorizationHeader =
             "Credential=" + signingCredentials;
         String signedHeadersAuthorizationHeader =

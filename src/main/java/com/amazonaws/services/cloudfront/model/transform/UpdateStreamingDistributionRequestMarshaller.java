@@ -38,45 +38,52 @@ public class UpdateStreamingDistributionRequestMarshaller implements Marshaller<
 
     public Request<UpdateStreamingDistributionRequest> marshall(UpdateStreamingDistributionRequest updateStreamingDistributionRequest) {
         if (updateStreamingDistributionRequest == null) {
-		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
-		}
+            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+        }
 
         Request<UpdateStreamingDistributionRequest> request = new DefaultRequest<UpdateStreamingDistributionRequest>(updateStreamingDistributionRequest, "AmazonCloudFront");
         request.setHttpMethod(HttpMethodName.PUT);
-        request.addHeader("If-Match", updateStreamingDistributionRequest.getIfMatch());
-	            
+        if (updateStreamingDistributionRequest.getIfMatch() != null)
+        	request.addHeader("If-Match", StringUtils.fromString(updateStreamingDistributionRequest.getIfMatch()));
+        
 
-        String uriResourcePath = "2010-11-01/streaming-distribution/{Id}/config"; 
+        String uriResourcePath = "2012-05-05/streaming-distribution/{Id}/config"; 
         uriResourcePath = uriResourcePath.replace("{Id}", getString(updateStreamingDistributionRequest.getId())); 
-	    
+
         if (uriResourcePath.contains("?")) {
-	        String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
-	        uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
-	
-	        for (String s : queryString.split("&")) {
-	            String[] nameValuePair = s.split("=");
-	            if (nameValuePair.length == 2) {
-	                request.addParameter(nameValuePair[0], nameValuePair[1]);
-	            }
-	        }
+            String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
+            uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
+
+            for (String s : queryString.split("[;&]")) {
+                String[] nameValuePair = s.split("=");
+                if (nameValuePair.length == 2) {
+                    request.addParameter(nameValuePair[0], nameValuePair[1]);
+                } else {
+                    request.addParameter(s, null);
+                }
+            }
         }
-	    
+
         request.setResourcePath(uriResourcePath);
 
-        	            
-	        StringWriter stringWriter = new StringWriter();
-	        XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2010-11-01/");
+        
+            StringWriter stringWriter = new StringWriter();
+            XMLWriter xmlWriter = new XMLWriter(stringWriter, "http://cloudfront.amazonaws.com/doc/2012-05-05/");
 
-			        if (updateStreamingDistributionRequest != null) {
+            
+                    if (updateStreamingDistributionRequest != null) {
             StreamingDistributionConfig streamingDistributionConfigStreamingDistributionConfig = updateStreamingDistributionRequest.getStreamingDistributionConfig();
             if (streamingDistributionConfigStreamingDistributionConfig != null) {
                 xmlWriter.startElement("StreamingDistributionConfig");
+                if (streamingDistributionConfigStreamingDistributionConfig.getCallerReference() != null) {
+                    xmlWriter.startElement("CallerReference").value(streamingDistributionConfigStreamingDistributionConfig.getCallerReference()).endElement();
+                }
                 if (streamingDistributionConfigStreamingDistributionConfig != null) {
                     S3Origin s3OriginS3Origin = streamingDistributionConfigStreamingDistributionConfig.getS3Origin();
                     if (s3OriginS3Origin != null) {
                         xmlWriter.startElement("S3Origin");
-                        if (s3OriginS3Origin.getDNSName() != null) {
-                            xmlWriter.startElement("DNSName").value(s3OriginS3Origin.getDNSName()).endElement();
+                        if (s3OriginS3Origin.getDomainName() != null) {
+                            xmlWriter.startElement("DomainName").value(s3OriginS3Origin.getDomainName()).endElement();
                         }
                         if (s3OriginS3Origin.getOriginAccessIdentity() != null) {
                             xmlWriter.startElement("OriginAccessIdentity").value(s3OriginS3Origin.getOriginAccessIdentity()).endElement();
@@ -84,35 +91,44 @@ public class UpdateStreamingDistributionRequestMarshaller implements Marshaller<
                         xmlWriter.endElement();
                     }
                 }
-                if (streamingDistributionConfigStreamingDistributionConfig.getCallerReference() != null) {
-                    xmlWriter.startElement("CallerReference").value(streamingDistributionConfigStreamingDistributionConfig.getCallerReference()).endElement();
-                }
-
                 if (streamingDistributionConfigStreamingDistributionConfig != null) {
-                    java.util.List<String> cNAMEList = streamingDistributionConfigStreamingDistributionConfig.getCNAME();
-                    if (cNAMEList != null && cNAMEList.size() > 0) {
-                        int cNAMEListIndex = 1;
-                        for (String cNAMEListValue : cNAMEList) {
-
-                        xmlWriter.startElement("CNAME");
-                            xmlWriter.value(cNAMEListValue);
-                        xmlWriter.endElement();
-
-
-                            cNAMEListIndex++;
+                    Aliases aliasesAliases = streamingDistributionConfigStreamingDistributionConfig.getAliases();
+                    if (aliasesAliases != null) {
+                        xmlWriter.startElement("Aliases");
+                        if (aliasesAliases.getQuantity() != null) {
+                            xmlWriter.startElement("Quantity").value(aliasesAliases.getQuantity()).endElement();
                         }
+
+                        if (aliasesAliases != null) {
+                            java.util.List<String> aliasesAliasesitemsList = aliasesAliases.getItems();
+                            if (aliasesAliasesitemsList != null && aliasesAliasesitemsList.size() > 0) {
+                                int aliasesAliasesitemsListIndex = 1;
+                                xmlWriter.startElement("Items");
+                                for (String aliasesAliasesitemsListValue : aliasesAliasesitemsList) {
+
+                                xmlWriter.startElement("CNAME");
+                                    xmlWriter.value(aliasesAliasesitemsListValue);
+                                xmlWriter.endElement();
+
+
+                                    aliasesAliasesitemsListIndex++;
+                                }
+                                xmlWriter.endElement();
+                            }
+                        }
+                        xmlWriter.endElement();
                     }
                 }
                 if (streamingDistributionConfigStreamingDistributionConfig.getComment() != null) {
                     xmlWriter.startElement("Comment").value(streamingDistributionConfigStreamingDistributionConfig.getComment()).endElement();
                 }
-                if (streamingDistributionConfigStreamingDistributionConfig.isEnabled() != null) {
-                    xmlWriter.startElement("Enabled").value(streamingDistributionConfigStreamingDistributionConfig.isEnabled()).endElement();
-                }
                 if (streamingDistributionConfigStreamingDistributionConfig != null) {
                     LoggingConfig loggingConfigLogging = streamingDistributionConfigStreamingDistributionConfig.getLogging();
                     if (loggingConfigLogging != null) {
                         xmlWriter.startElement("Logging");
+                        if (loggingConfigLogging.isEnabled() != null) {
+                            xmlWriter.startElement("Enabled").value(loggingConfigLogging.isEnabled()).endElement();
+                        }
                         if (loggingConfigLogging.getBucket() != null) {
                             xmlWriter.startElement("Bucket").value(loggingConfigLogging.getBucket()).endElement();
                         }
@@ -126,45 +142,53 @@ public class UpdateStreamingDistributionRequestMarshaller implements Marshaller<
                     TrustedSigners trustedSignersTrustedSigners = streamingDistributionConfigStreamingDistributionConfig.getTrustedSigners();
                     if (trustedSignersTrustedSigners != null) {
                         xmlWriter.startElement("TrustedSigners");
-                        if (trustedSignersTrustedSigners.getSelf() != null) {
-                            xmlWriter.startElement("Self").value(trustedSignersTrustedSigners.getSelf()).endElement();
+                        if (trustedSignersTrustedSigners.isEnabled() != null) {
+                            xmlWriter.startElement("Enabled").value(trustedSignersTrustedSigners.isEnabled()).endElement();
+                        }
+                        if (trustedSignersTrustedSigners.getQuantity() != null) {
+                            xmlWriter.startElement("Quantity").value(trustedSignersTrustedSigners.getQuantity()).endElement();
                         }
 
                         if (trustedSignersTrustedSigners != null) {
-                            java.util.List<String> awsAccountNumbersList = trustedSignersTrustedSigners.getAwsAccountNumbers();
-                            if (awsAccountNumbersList != null && awsAccountNumbersList.size() > 0) {
-                                int awsAccountNumbersListIndex = 1;
-                                for (String awsAccountNumbersListValue : awsAccountNumbersList) {
+                            java.util.List<String> trustedSignersTrustedSignersitemsList = trustedSignersTrustedSigners.getItems();
+                            if (trustedSignersTrustedSignersitemsList != null && trustedSignersTrustedSignersitemsList.size() > 0) {
+                                int trustedSignersTrustedSignersitemsListIndex = 1;
+                                xmlWriter.startElement("Items");
+                                for (String trustedSignersTrustedSignersitemsListValue : trustedSignersTrustedSignersitemsList) {
 
                                 xmlWriter.startElement("AwsAccountNumber");
-                                    xmlWriter.value(awsAccountNumbersListValue);
+                                    xmlWriter.value(trustedSignersTrustedSignersitemsListValue);
                                 xmlWriter.endElement();
 
 
-                                    awsAccountNumbersListIndex++;
+                                    trustedSignersTrustedSignersitemsListIndex++;
                                 }
+                                xmlWriter.endElement();
                             }
                         }
                         xmlWriter.endElement();
                     }
                 }
+                if (streamingDistributionConfigStreamingDistributionConfig.isEnabled() != null) {
+                    xmlWriter.startElement("Enabled").value(streamingDistributionConfigStreamingDistributionConfig.isEnabled()).endElement();
+                }
                 xmlWriter.endElement();
             }
         }
 
-	
-	        try {
-	            request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
-	            request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
-	            request.addHeader("Content-Type", "application/xml");
-	        } catch (UnsupportedEncodingException e) {
-	            throw new AmazonClientException("Unable to marshall request to XML", e);
-	        }
-		
+
+            try {
+                request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
+                request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
+                request.addHeader("Content-Type", "application/xml");
+            } catch (UnsupportedEncodingException e) {
+                throw new AmazonClientException("Unable to marshall request to XML", e);
+            }
+        
 
         return request;
     }
-    
+
     private String getString(String s) {
         if (s == null) return "";
         return s;

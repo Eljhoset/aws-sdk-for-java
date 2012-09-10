@@ -34,6 +34,9 @@ public class KeySchemaElementJsonUnmarshaller implements Unmarshaller<KeySchemaE
 
     public KeySchemaElement unmarshall(JsonUnmarshallerContext context) throws Exception {
         KeySchemaElement keySchemaElement = new KeySchemaElement();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class KeySchemaElementJsonUnmarshaller implements Unmarshaller<KeySchemaE
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return keySchemaElement;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("AttributeName", targetDepth)) {
                     context.nextToken();
@@ -53,12 +57,14 @@ public class KeySchemaElementJsonUnmarshaller implements Unmarshaller<KeySchemaE
                     keySchemaElement.setAttributeType(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return keySchemaElement;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return keySchemaElement;
     }
 
     private static KeySchemaElementJsonUnmarshaller instance;

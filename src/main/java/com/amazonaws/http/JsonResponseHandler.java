@@ -45,6 +45,8 @@ public class JsonResponseHandler<T> implements HttpResponseHandler<AmazonWebServ
 
     private static JsonFactory jsonFactory = new JsonFactory();
 
+    public boolean needsConnectionLeftOpen = false;
+
 
     /**
      * Constructs a new response handler that will use the specified StAX
@@ -76,10 +78,15 @@ public class JsonResponseHandler<T> implements HttpResponseHandler<AmazonWebServ
      */
     public AmazonWebServiceResponse<T> handle(HttpResponse response) throws Exception {
         log.trace("Parsing service response JSON");
-        JsonParser jsonParser = jsonFactory.createJsonParser(response.getContent());
+
+        JsonParser jsonParser = null;
+        if (!needsConnectionLeftOpen) {
+        	jsonParser = jsonFactory.createJsonParser(response.getContent());
+        }
+
         try {
             AmazonWebServiceResponse<T> awsResponse = new AmazonWebServiceResponse<T>();
-            JsonUnmarshallerContext unmarshallerContext = new JsonUnmarshallerContext(jsonParser);
+            JsonUnmarshallerContext unmarshallerContext = new JsonUnmarshallerContext(jsonParser, response);
             registerAdditionalMetadataExpressions(unmarshallerContext);
 
             T result = responseUnmarshaller.unmarshall(unmarshallerContext);
@@ -92,7 +99,9 @@ public class JsonResponseHandler<T> implements HttpResponseHandler<AmazonWebServ
             log.trace("Done parsing service response");
             return awsResponse;
         } finally {
-            try {jsonParser.close();} catch (Exception e) {}
+            if (!needsConnectionLeftOpen) {
+                try {jsonParser.close();} catch (Exception e) {}
+            }
         }
     }
 
@@ -114,7 +123,7 @@ public class JsonResponseHandler<T> implements HttpResponseHandler<AmazonWebServ
      * @see com.amazonaws.http.HttpResponseHandler#needsConnectionLeftOpen()
      */
     public boolean needsConnectionLeftOpen() {
-        return false;
+        return needsConnectionLeftOpen;
     }
 
 }

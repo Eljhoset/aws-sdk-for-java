@@ -18,11 +18,8 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#createImage(CreateImageRequest) CreateImage operation}.
  * <p>
- * Creates an Amazon EBS-backed AMI from a "running" or "stopped"
- * instance. AMIs that use an Amazon EBS root device boot faster than
- * AMIs that use instance stores. They can be up to 1 TiB in size, use
- * storage that persists on instance failure, and can be stopped and
- * started.
+ * Creates an Amazon EBS-backed AMI from a "running" or "stopped" instance. AMIs that use an Amazon EBS root device boot faster than AMIs that use
+ * instance stores. They can be up to 1 TiB in size, use storage that persists on instance failure, and can be stopped and started.
  * </p>
  *
  * @see com.amazonaws.services.ec2.AmazonEC2#createImage(CreateImageRequest)
@@ -53,6 +50,8 @@ public class CreateImageRequest extends AmazonWebServiceRequest {
      * be guaranteed.
      */
     private Boolean noReboot;
+
+    private java.util.List<BlockDeviceMapping> blockDeviceMappings;
 
     /**
      * Default constructor for a new CreateImageRequest object.  Callers should use the
@@ -262,6 +261,75 @@ public class CreateImageRequest extends AmazonWebServiceRequest {
     }
     
     /**
+     * Returns the value of the BlockDeviceMappings property for this object.
+     *
+     * @return The value of the BlockDeviceMappings property for this object.
+     */
+    public java.util.List<BlockDeviceMapping> getBlockDeviceMappings() {
+        
+        if (blockDeviceMappings == null) {
+            blockDeviceMappings = new java.util.ArrayList<BlockDeviceMapping>();
+        }
+        return blockDeviceMappings;
+    }
+    
+    /**
+     * Sets the value of the BlockDeviceMappings property for this object.
+     *
+     * @param blockDeviceMappings The new value for the BlockDeviceMappings property for this object.
+     */
+    public void setBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+            return;
+        }
+
+        java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
+        blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+        this.blockDeviceMappings = blockDeviceMappingsCopy;
+    }
+    
+    /**
+     * Sets the value of the BlockDeviceMappings property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param blockDeviceMappings The new value for the BlockDeviceMappings property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateImageRequest withBlockDeviceMappings(BlockDeviceMapping... blockDeviceMappings) {
+        if (getBlockDeviceMappings() == null) setBlockDeviceMappings(new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.length));
+        for (BlockDeviceMapping value : blockDeviceMappings) {
+            getBlockDeviceMappings().add(value);
+        }
+        return this;
+    }
+    
+    /**
+     * Sets the value of the BlockDeviceMappings property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param blockDeviceMappings The new value for the BlockDeviceMappings property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateImageRequest withBlockDeviceMappings(java.util.Collection<BlockDeviceMapping> blockDeviceMappings) {
+        if (blockDeviceMappings == null) {
+            this.blockDeviceMappings = null;
+        } else {
+            java.util.List<BlockDeviceMapping> blockDeviceMappingsCopy = new java.util.ArrayList<BlockDeviceMapping>(blockDeviceMappings.size());
+            blockDeviceMappingsCopy.addAll(blockDeviceMappings);
+            this.blockDeviceMappings = blockDeviceMappingsCopy;
+        }
+
+        return this;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -277,6 +345,7 @@ public class CreateImageRequest extends AmazonWebServiceRequest {
         if (name != null) sb.append("Name: " + name + ", ");
         if (description != null) sb.append("Description: " + description + ", ");
         if (noReboot != null) sb.append("NoReboot: " + noReboot + ", ");
+        if (blockDeviceMappings != null) sb.append("BlockDeviceMappings: " + blockDeviceMappings + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -290,6 +359,7 @@ public class CreateImageRequest extends AmazonWebServiceRequest {
         hashCode = prime * hashCode + ((getName() == null) ? 0 : getName().hashCode()); 
         hashCode = prime * hashCode + ((getDescription() == null) ? 0 : getDescription().hashCode()); 
         hashCode = prime * hashCode + ((isNoReboot() == null) ? 0 : isNoReboot().hashCode()); 
+        hashCode = prime * hashCode + ((getBlockDeviceMappings() == null) ? 0 : getBlockDeviceMappings().hashCode()); 
         return hashCode;
     }
     
@@ -309,6 +379,8 @@ public class CreateImageRequest extends AmazonWebServiceRequest {
         if (other.getDescription() != null && other.getDescription().equals(this.getDescription()) == false) return false; 
         if (other.isNoReboot() == null ^ this.isNoReboot() == null) return false;
         if (other.isNoReboot() != null && other.isNoReboot().equals(this.isNoReboot()) == false) return false; 
+        if (other.getBlockDeviceMappings() == null ^ this.getBlockDeviceMappings() == null) return false;
+        if (other.getBlockDeviceMappings() != null && other.getBlockDeviceMappings().equals(this.getBlockDeviceMappings()) == false) return false; 
         return true;
     }
     

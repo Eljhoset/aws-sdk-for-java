@@ -16,19 +16,24 @@ package com.amazonaws.services.simpleemail.model;
 
 /**
  * <p>
- * Represents a list of <code>SendDataPoint</code> items returned from a
- * successful <code>GetSendStatistics</code> request. This list contains
- * aggregated data from the previous two weeks of sending activity.
+ * Represents a list of <code>SendDataPoint</code> items returned from a successful <code>GetSendStatistics</code> request. This list contains aggregated
+ * data from the previous two weeks of sending activity.
  * </p>
  */
 public class GetSendStatisticsResult {
 
+    /**
+     * A list of data points, each of which represents 15 minutes of
+     * activity.
+     */
     private java.util.List<SendDataPoint> sendDataPoints;
 
     /**
-     * Returns the value of the SendDataPoints property for this object.
+     * A list of data points, each of which represents 15 minutes of
+     * activity.
      *
-     * @return The value of the SendDataPoints property for this object.
+     * @return A list of data points, each of which represents 15 minutes of
+     *         activity.
      */
     public java.util.List<SendDataPoint> getSendDataPoints() {
         
@@ -39,9 +44,11 @@ public class GetSendStatisticsResult {
     }
     
     /**
-     * Sets the value of the SendDataPoints property for this object.
+     * A list of data points, each of which represents 15 minutes of
+     * activity.
      *
-     * @param sendDataPoints The new value for the SendDataPoints property for this object.
+     * @param sendDataPoints A list of data points, each of which represents 15 minutes of
+     *         activity.
      */
     public void setSendDataPoints(java.util.Collection<SendDataPoint> sendDataPoints) {
         if (sendDataPoints == null) {
@@ -55,11 +62,13 @@ public class GetSendStatisticsResult {
     }
     
     /**
-     * Sets the value of the SendDataPoints property for this object.
+     * A list of data points, each of which represents 15 minutes of
+     * activity.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param sendDataPoints The new value for the SendDataPoints property for this object.
+     * @param sendDataPoints A list of data points, each of which represents 15 minutes of
+     *         activity.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -73,11 +82,13 @@ public class GetSendStatisticsResult {
     }
     
     /**
-     * Sets the value of the SendDataPoints property for this object.
+     * A list of data points, each of which represents 15 minutes of
+     * activity.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param sendDataPoints The new value for the SendDataPoints property for this object.
+     * @param sendDataPoints A list of data points, each of which represents 15 minutes of
+     *         activity.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 

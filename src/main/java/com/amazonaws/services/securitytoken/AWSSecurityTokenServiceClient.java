@@ -43,37 +43,28 @@ import com.amazonaws.services.securitytoken.model.transform.*;
  * completes.
  * <p>
  * AWS Security Token Service <p>
- * This is the <i>AWS Security Token Service API Reference</i> . The AWS
- * Security Token Service is a web service that enables you to request
- * temporary, limited-privilege credentials for AWS Identity and Access
- * Management (IAM) users or for users that you authenticate (federated
- * users). This guide provides descriptions of the AWS Security Token
- * Service API as well as links to related content in <a
- * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/"> Using
- * IAM </a> .
+ * The AWS Security Token Service is a web service that enables you to request temporary, limited-privilege credentials for AWS Identity and Access
+ * Management (IAM) users or for users that you authenticate (federated users). This guide provides descriptions of the AWS Security Token Service API.
  * </p>
  * <p>
- * For more detailed information about using this service, go to <a
- * /docs.amazonwebservices.com/IAM/latest/UserGuide/TokenBasedAuth.html">
- * Granting Temporary Access to Your AWS Resources </a> in <i>Using
- * IAM</i> .
+ * For more detailed information about using this service, go to <a href="http://docs.amazonwebservices.com/IAM/latest/UsingSTS/Welcome.html"> Using
+ * Temporary Security Credentials </a> .
  * </p>
  * <p>
- * For specific information about setting up signatures and authorization
- * through the API, go to <a
- * cs.amazonwebservices.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">
- * Making Query Requests </a> in <i>Using IAM</i> .
+ * For information about setting up signatures and authorization through the API, go to <a
+ * href="http://docs.amazonwebservices.com/general/latest/gr/signing_aws_api_requests.html"> Signing AWS API Requests </a> in the <i>AWS General
+ * Reference</i> . For general information about the Query API, go to <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html"> Making Query Requests </a> in <i>Using IAM</i> . For
+ * information about using security tokens with other AWS products, go to <a
+ * href="http://docs.amazonwebservices.com/IAM/latest/UsingSTS/UsingTokens.html"> Using Temporary Security Credentials to Access AWS </a> in <i>Using
+ * Temporary Security Credentials</i> .
  * </p>
  * <p>
- * If you're new to AWS and need additional technical information about a
- * specific AWS product, you can find the product's technical
- * documentation at <a href="http://aws.amazon.com/documentation/">
- * http://aws.amazon.com/documentation/ </a> .
+ * If you're new to AWS and need additional technical information about a specific AWS product, you can find the product's technical documentation at <a
+ * href="http://aws.amazon.com/documentation/"> http://aws.amazon.com/documentation/ </a> .
  * </p>
  * <p>
- * We will refer to Amazon Identity and Access Management using the
- * abbreviated form IAM. All copyrights and legal protections still
- * apply.
+ * We will refer to Amazon Identity and Access Management using the abbreviated form IAM. All copyrights and legal protections still apply.
  * </p>
  */
 public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implements AWSSecurityTokenService {
@@ -86,11 +77,55 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
-    private QueryStringSigner signer;
+    private AWS4Signer signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AWSSecurityTokenService.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AWSSecurityTokenServiceClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AWSSecurityTokenService.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AWSSecurityTokenService
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AWSSecurityTokenServiceClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -127,7 +162,7 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AWSSecurityTokenService using the specified AWS account credentials provider.
@@ -136,7 +171,7 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -153,7 +188,7 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -166,20 +201,23 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new PackedPolicyTooLargeExceptionUnmarshaller());
         exceptionUnmarshallers.add(new MalformedPolicyDocumentExceptionUnmarshaller());
         
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller());
         setEndpoint("sts.amazonaws.com");
 
-        signer = new QueryStringSigner();
+        signer = new AWS4Signer();
+        
+        signer.setServiceName("sts");
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/securitytoken/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -189,6 +227,8 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      * valid for the specified duration only. The session duration for IAM
      * users can be between one and 36 hours, with a default of 12 hours. The
      * session duration for AWS account owners is restricted to one hour.
+     * Providing the AWS Multi-Factor Authentication (MFA) device serial
+     * number and the token code is optional.
      * </p>
      * <p>
      * For more information about using GetSessionToken to create temporary
@@ -225,8 +265,9 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      * The GetFederationToken action returns a set of temporary credentials
      * for a federated user with the user name and policy specified in the
      * request. The credentials consist of an Access Key ID, a Secret Access
-     * Key, and a security token. The credentials are valid for the specified
-     * duration, between one and 36 hours.
+     * Key, and a security token. Credentials created by IAM users are valid
+     * for the specified duration, between one and 36 hours; credentials
+     * created using account credentials last one hour.
      * </p>
      * <p>
      * The federated user who holds these credentials has any permissions
@@ -276,6 +317,8 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
      * valid for the specified duration only. The session duration for IAM
      * users can be between one and 36 hours, with a default of 12 hours. The
      * session duration for AWS account owners is restricted to one hour.
+     * Providing the AWS Multi-Factor Authentication (MFA) device serial
+     * number and the token code is optional.
      * </p>
      * <p>
      * For more information about using GetSessionToken to create temporary
@@ -301,7 +344,47 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
         return getSessionToken(new GetSessionTokenRequest());
     }
     
-
+    /**
+     * Overrides the default endpoint for this client ("https://sts.amazonaws.com") and explicitly provides
+     * an AWS region ID and AWS service name to use when the client calculates a signature
+     * for requests.  In almost all cases, this region ID and service name
+     * are automatically determined from the endpoint, and callers should use the simpler
+     * one-argument form of setEndpoint instead of this method.
+     * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
+     * Callers can pass in just the endpoint (ex: "sts.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://sts.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "sts.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://sts.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param serviceName
+     *            The name of the AWS service to use when signing requests.
+     * @param regionId
+     *            The ID of the region in which this service resides.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String serviceName, String regionId) throws IllegalArgumentException {
+        setEndpoint(endpoint);
+        signer.setServiceName(serviceName);
+        signer.setRegionName(regionId);
+    }
+    
 
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
@@ -329,7 +412,7 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -341,7 +424,7 @@ public class AWSSecurityTokenServiceClient extends AmazonWebServiceClient implem
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

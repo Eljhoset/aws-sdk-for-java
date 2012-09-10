@@ -21,16 +21,12 @@ import com.amazonaws.services.elasticmapreduce.model.*;
 /**
  * Interface for accessing AmazonElasticMapReduce.
  * <p>
- * This is the <i>Amazon Elastic MapReduce API Reference</i> . This
- * guide provides descriptions and samples of the Amazon Elastic
- * MapReduce APIs.
+ * This is the <i>Amazon Elastic MapReduce API Reference</i> . This guide provides descriptions and samples of the Amazon Elastic MapReduce APIs.
  * </p>
  * <p>
- * Amazon Elastic MapReduce is a web service that makes it easy to
- * process large amounts of data efficiently. Elastic MapReduce uses
- * Hadoop processing combined with several AWS products to do tasks such
- * as web indexing, data mining, log file analysis, machine learning,
- * scientific simulation, and data warehousing.
+ * Amazon Elastic MapReduce is a web service that makes it easy to process large amounts of data efficiently. Elastic MapReduce uses Hadoop processing
+ * combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data
+ * warehousing.
  * </p>
  */
 public interface AmazonElasticMapReduce {
@@ -39,8 +35,8 @@ public interface AmazonElasticMapReduce {
      * Overrides the default endpoint for this client ("https://elasticmapreduce.amazonaws.com").
      * Callers can use this method to control which AWS region they want to work with.
      * <p>
-     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
-     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * Callers can pass in just the endpoint (ex: "elasticmapreduce.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://elasticmapreduce.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
@@ -50,8 +46,8 @@ public interface AmazonElasticMapReduce {
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
      *
      * @param endpoint
-     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
-     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            The endpoint (ex: "elasticmapreduce.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://elasticmapreduce.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
      *

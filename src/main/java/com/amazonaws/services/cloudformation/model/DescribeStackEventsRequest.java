@@ -18,17 +18,12 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStackEvents(DescribeStackEventsRequest) DescribeStackEvents operation}.
  * <p>
- * Returns all the stack related events for the AWS account. If
- * <code>StackName</code> is specified, returns events related to all the
- * stacks with the given name. If <code>StackName</code> is not
- * specified, returns all the events for the account. For more
- * information about a stack's event history, go to the <a
- * http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">
- * AWS CloudFormation User Guide </a> .
+ * Returns all the stack related events for the AWS account. If <code>StackName</code> is specified, returns events related to all the stacks with the
+ * given name. If <code>StackName</code> is not specified, returns all the events for the account. For more information about a stack's event history, go
+ * to the <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide"> AWS CloudFormation User Guide </a> .
  * </p>
  * <p>
- * <b>NOTE:</b>Events are returned, even if the stack never existed or
- * has been successfully deleted.
+ * <b>NOTE:</b>Events are returned, even if the stack never existed or has been successfully deleted.
  * </p>
  *
  * @see com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStackEvents(DescribeStackEventsRequest)
@@ -36,14 +31,14 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name or the unique identifier associated with the stack.<br></br>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      */
     private String stackName;
 
     /**
      * String that identifies the start of the next list of events, if there
-     * is one.<br></br> Default: There is no default value.
+     * is one. <p>Default: There is no default value.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1024<br/>
@@ -51,35 +46,35 @@ public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
     private String nextToken;
 
     /**
-     * The name or the unique identifier associated with the stack.<br></br>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @return The name or the unique identifier associated with the stack.<br></br>
-     *         Default: There is no default value.
+     * @return The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public String getStackName() {
         return stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack.<br></br>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @param stackName The name or the unique identifier associated with the stack.<br></br>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public void setStackName(String stackName) {
         this.stackName = stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack.<br></br>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param stackName The name or the unique identifier associated with the stack.<br></br>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -92,13 +87,13 @@ public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
     
     /**
      * String that identifies the start of the next list of events, if there
-     * is one.<br></br> Default: There is no default value.
+     * is one. <p>Default: There is no default value.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1024<br/>
      *
      * @return String that identifies the start of the next list of events, if there
-     *         is one.<br></br> Default: There is no default value.
+     *         is one. <p>Default: There is no default value.
      */
     public String getNextToken() {
         return nextToken;
@@ -106,13 +101,13 @@ public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
     
     /**
      * String that identifies the start of the next list of events, if there
-     * is one.<br></br> Default: There is no default value.
+     * is one. <p>Default: There is no default value.
      * <p>
      * <b>Constraints:</b><br/>
      * <b>Length: </b>1 - 1024<br/>
      *
      * @param nextToken String that identifies the start of the next list of events, if there
-     *         is one.<br></br> Default: There is no default value.
+     *         is one. <p>Default: There is no default value.
      */
     public void setNextToken(String nextToken) {
         this.nextToken = nextToken;
@@ -120,7 +115,7 @@ public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
     
     /**
      * String that identifies the start of the next list of events, if there
-     * is one.<br></br> Default: There is no default value.
+     * is one. <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
@@ -128,7 +123,7 @@ public class DescribeStackEventsRequest extends AmazonWebServiceRequest {
      * <b>Length: </b>1 - 1024<br/>
      *
      * @param nextToken String that identifies the start of the next list of events, if there
-     *         is one.<br></br> Default: There is no default value.
+     *         is one. <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 

@@ -38,36 +38,39 @@ public class ChangeResourceRecordSetsRequestMarshaller implements Marshaller<Req
 
     public Request<ChangeResourceRecordSetsRequest> marshall(ChangeResourceRecordSetsRequest changeResourceRecordSetsRequest) {
         if (changeResourceRecordSetsRequest == null) {
-		    throw new AmazonClientException("Invalid argument passed to marshall(...)");
-		}
+            throw new AmazonClientException("Invalid argument passed to marshall(...)");
+        }
 
         Request<ChangeResourceRecordSetsRequest> request = new DefaultRequest<ChangeResourceRecordSetsRequest>(changeResourceRecordSetsRequest, "AmazonRoute53");
-        request.setHttpMethod(HttpMethodName.POST);        
+        request.setHttpMethod(HttpMethodName.POST);
 
-        String uriResourcePath = "/2011-05-05/hostedzone/{Id}/rrset/"; 
+        String uriResourcePath = "/2012-02-29/hostedzone/{Id}/rrset/"; 
         uriResourcePath = uriResourcePath.replace("{Id}", getString(changeResourceRecordSetsRequest.getHostedZoneId())); 
-	    
+
         if (uriResourcePath.contains("?")) {
-	        String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
-	        uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
-	
-	        for (String s : queryString.split("&")) {
-	            String[] nameValuePair = s.split("=");
-	            if (nameValuePair.length == 2) {
-	                request.addParameter(nameValuePair[0], nameValuePair[1]);
-	            }
-	        }
+            String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
+            uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
+
+            for (String s : queryString.split("[;&]")) {
+                String[] nameValuePair = s.split("=");
+                if (nameValuePair.length == 2) {
+                    request.addParameter(nameValuePair[0], nameValuePair[1]);
+                } else {
+                    request.addParameter(s, null);
+                }
+            }
         }
-	    
+
         request.setResourcePath(uriResourcePath);
 
-        	            
-	        StringWriter stringWriter = new StringWriter();
-	        XMLWriter xmlWriter = new XMLWriter(stringWriter, "https://route53.amazonaws.com/doc/2011-05-05/");
+        
+            StringWriter stringWriter = new StringWriter();
+            XMLWriter xmlWriter = new XMLWriter(stringWriter, "https://route53.amazonaws.com/doc/2012-02-29/");
 
-			
-			xmlWriter.startElement("ChangeResourceRecordSetsRequest");
-			        if (changeResourceRecordSetsRequest != null) {
+            
+            
+            xmlWriter.startElement("ChangeResourceRecordSetsRequest");
+                    if (changeResourceRecordSetsRequest != null) {
             ChangeBatch changeBatchChangeBatch = changeResourceRecordSetsRequest.getChangeBatch();
             if (changeBatchChangeBatch != null) {
                 xmlWriter.startElement("ChangeBatch");
@@ -76,18 +79,18 @@ public class ChangeResourceRecordSetsRequestMarshaller implements Marshaller<Req
                 }
 
                 if (changeBatchChangeBatch != null) {
-                    java.util.List<Change> changesList = changeBatchChangeBatch.getChanges();
-                    if (changesList != null && changesList.size() > 0) {
-                        int changesListIndex = 1;
+                    java.util.List<Change> changeBatchChangeBatchchangesList = changeBatchChangeBatch.getChanges();
+                    if (changeBatchChangeBatchchangesList != null && changeBatchChangeBatchchangesList.size() > 0) {
+                        int changeBatchChangeBatchchangesListIndex = 1;
                         xmlWriter.startElement("Changes");
-                        for (Change changesListValue : changesList) {
+                        for (Change changeBatchChangeBatchchangesListValue : changeBatchChangeBatchchangesList) {
 
                         xmlWriter.startElement("Change");
-                            if (changesListValue.getAction() != null) {
-                                xmlWriter.startElement("Action").value(changesListValue.getAction()).endElement();
+                            if (changeBatchChangeBatchchangesListValue.getAction() != null) {
+                                xmlWriter.startElement("Action").value(changeBatchChangeBatchchangesListValue.getAction()).endElement();
                             }
-                            if (changesListValue != null) {
-                                ResourceRecordSet resourceRecordSetResourceRecordSet = changesListValue.getResourceRecordSet();
+                            if (changeBatchChangeBatchchangesListValue != null) {
+                                ResourceRecordSet resourceRecordSetResourceRecordSet = changeBatchChangeBatchchangesListValue.getResourceRecordSet();
                                 if (resourceRecordSetResourceRecordSet != null) {
                                     xmlWriter.startElement("ResourceRecordSet");
                                     if (resourceRecordSetResourceRecordSet.getName() != null) {
@@ -102,25 +105,28 @@ public class ChangeResourceRecordSetsRequestMarshaller implements Marshaller<Req
                                     if (resourceRecordSetResourceRecordSet.getWeight() != null) {
                                         xmlWriter.startElement("Weight").value(resourceRecordSetResourceRecordSet.getWeight()).endElement();
                                     }
+                                    if (resourceRecordSetResourceRecordSet.getRegion() != null) {
+                                        xmlWriter.startElement("Region").value(resourceRecordSetResourceRecordSet.getRegion()).endElement();
+                                    }
                                     if (resourceRecordSetResourceRecordSet.getTTL() != null) {
                                         xmlWriter.startElement("TTL").value(resourceRecordSetResourceRecordSet.getTTL()).endElement();
                                     }
 
                                     if (resourceRecordSetResourceRecordSet != null) {
-                                        java.util.List<ResourceRecord> resourceRecordsList = resourceRecordSetResourceRecordSet.getResourceRecords();
-                                        if (resourceRecordsList != null && resourceRecordsList.size() > 0) {
-                                            int resourceRecordsListIndex = 1;
+                                        java.util.List<ResourceRecord> resourceRecordSetResourceRecordSetresourceRecordsList = resourceRecordSetResourceRecordSet.getResourceRecords();
+                                        if (resourceRecordSetResourceRecordSetresourceRecordsList != null && resourceRecordSetResourceRecordSetresourceRecordsList.size() > 0) {
+                                            int resourceRecordSetResourceRecordSetresourceRecordsListIndex = 1;
                                             xmlWriter.startElement("ResourceRecords");
-                                            for (ResourceRecord resourceRecordsListValue : resourceRecordsList) {
+                                            for (ResourceRecord resourceRecordSetResourceRecordSetresourceRecordsListValue : resourceRecordSetResourceRecordSetresourceRecordsList) {
 
                                             xmlWriter.startElement("ResourceRecord");
-                                                if (resourceRecordsListValue.getValue() != null) {
-                                                    xmlWriter.startElement("Value").value(resourceRecordsListValue.getValue()).endElement();
+                                                if (resourceRecordSetResourceRecordSetresourceRecordsListValue.getValue() != null) {
+                                                    xmlWriter.startElement("Value").value(resourceRecordSetResourceRecordSetresourceRecordsListValue.getValue()).endElement();
                                                 }
                                             xmlWriter.endElement();
 
 
-                                                resourceRecordsListIndex++;
+                                                resourceRecordSetResourceRecordSetresourceRecordsListIndex++;
                                             }
                                             xmlWriter.endElement();
                                         }
@@ -144,7 +150,7 @@ public class ChangeResourceRecordSetsRequestMarshaller implements Marshaller<Req
                         xmlWriter.endElement();
 
 
-                            changesListIndex++;
+                            changeBatchChangeBatchchangesListIndex++;
                         }
                         xmlWriter.endElement();
                     }
@@ -153,21 +159,21 @@ public class ChangeResourceRecordSetsRequestMarshaller implements Marshaller<Req
             }
         }
 
-			xmlWriter.endElement();
-			
-	
-	        try {
-	            request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
-	            request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
-	            request.addHeader("Content-Type", "application/xml");
-	        } catch (UnsupportedEncodingException e) {
-	            throw new AmazonClientException("Unable to marshall request to XML", e);
-	        }
-		
+            xmlWriter.endElement();
+            
+
+            try {
+                request.setContent(new StringInputStream(stringWriter.getBuffer().toString()));
+                request.addHeader("Content-Length", Integer.toString(stringWriter.getBuffer().toString().getBytes().length));
+                request.addHeader("Content-Type", "application/xml");
+            } catch (UnsupportedEncodingException e) {
+                throw new AmazonClientException("Unable to marshall request to XML", e);
+            }
+        
 
         return request;
     }
-    
+
     private String getString(String s) {
         if (s == null) return "";
         return s;

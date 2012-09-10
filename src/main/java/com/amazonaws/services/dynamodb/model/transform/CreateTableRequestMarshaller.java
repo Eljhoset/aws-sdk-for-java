@@ -26,18 +26,19 @@ import java.util.List;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.Request;
 import com.amazonaws.DefaultRequest;
+import com.amazonaws.http.HttpMethodName;
 import com.amazonaws.services.dynamodb.model.*;
 import com.amazonaws.transform.Marshaller;
 import com.amazonaws.util.StringUtils;
 import com.amazonaws.util.StringInputStream;
 import com.amazonaws.util.json.*;
 
-import static com.amazonaws.http.HttpMethodName.POST;
-
 /**
  * Create Table Request Marshaller
  */
 public class CreateTableRequestMarshaller implements Marshaller<Request<CreateTableRequest>, CreateTableRequest> {
+
+    
 
     public Request<CreateTableRequest> marshall(CreateTableRequest createTableRequest) {
 		if (createTableRequest == null) {
@@ -48,72 +49,110 @@ public class CreateTableRequestMarshaller implements Marshaller<Request<CreateTa
         String target = "DynamoDB_20111205.CreateTable";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.0");
-        request.setHttpMethod(POST);
 
+        
+        request.setHttpMethod(HttpMethodName.POST);
+
+
+        String uriResourcePath = ""; 
+
+        if (uriResourcePath.contains("?")) {
+            String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
+            uriResourcePath    = uriResourcePath.substring(0, uriResourcePath.indexOf("?"));
+
+            for (String s : queryString.split("[;&]")) {
+                String[] nameValuePair = s.split("=");
+                if (nameValuePair.length == 2) {
+                    request.addParameter(nameValuePair[0], nameValuePair[1]);
+                } else {
+                    request.addParameter(s, null);
+                }
+            }
+        }
+
+        request.setResourcePath(uriResourcePath);
+
+
+        
         try {
         	StringWriter stringWriter = new StringWriter();
         	JSONWriter jsonWriter = new JSONWriter(stringWriter);
+
+        	
+            
         	jsonWriter.object();
-	        
+        	
             if (createTableRequest.getTableName() != null) {
                 jsonWriter.key("TableName").value(createTableRequest.getTableName());
             }
-            if (createTableRequest != null) {
-                KeySchema keySchemaKeySchema = createTableRequest.getKeySchema();
-                if (keySchemaKeySchema != null) {
-                    jsonWriter.key("KeySchema").object();
-                    if (keySchemaKeySchema != null) {
-                        KeySchemaElement keySchemaElementHashKeyElement = keySchemaKeySchema.getHashKeyElement();
-                        if (keySchemaElementHashKeyElement != null) {
-                            jsonWriter.key("HashKeyElement").object();
-                            if (keySchemaElementHashKeyElement.getAttributeName() != null) {
-                                jsonWriter.key("AttributeName").value(keySchemaElementHashKeyElement.getAttributeName());
-                            }
-                            if (keySchemaElementHashKeyElement.getAttributeType() != null) {
-                                jsonWriter.key("AttributeType").value(keySchemaElementHashKeyElement.getAttributeType());
-                            }
-                            jsonWriter.endObject();
-                        }
+            KeySchema keySchema = createTableRequest.getKeySchema();
+            if (keySchema != null) {
+
+                jsonWriter.key("KeySchema");
+                jsonWriter.object();
+
+                KeySchemaElement hashKeyElement = keySchema.getHashKeyElement();
+                if (hashKeyElement != null) {
+
+                    jsonWriter.key("HashKeyElement");
+                    jsonWriter.object();
+
+                    if (hashKeyElement.getAttributeName() != null) {
+                        jsonWriter.key("AttributeName").value(hashKeyElement.getAttributeName());
                     }
-                    if (keySchemaKeySchema != null) {
-                        KeySchemaElement keySchemaElementRangeKeyElement = keySchemaKeySchema.getRangeKeyElement();
-                        if (keySchemaElementRangeKeyElement != null) {
-                            jsonWriter.key("RangeKeyElement").object();
-                            if (keySchemaElementRangeKeyElement.getAttributeName() != null) {
-                                jsonWriter.key("AttributeName").value(keySchemaElementRangeKeyElement.getAttributeName());
-                            }
-                            if (keySchemaElementRangeKeyElement.getAttributeType() != null) {
-                                jsonWriter.key("AttributeType").value(keySchemaElementRangeKeyElement.getAttributeType());
-                            }
-                            jsonWriter.endObject();
-                        }
+                    if (hashKeyElement.getAttributeType() != null) {
+                        jsonWriter.key("AttributeType").value(hashKeyElement.getAttributeType());
                     }
                     jsonWriter.endObject();
                 }
+                KeySchemaElement rangeKeyElement = keySchema.getRangeKeyElement();
+                if (rangeKeyElement != null) {
+
+                    jsonWriter.key("RangeKeyElement");
+                    jsonWriter.object();
+
+                    if (rangeKeyElement.getAttributeName() != null) {
+                        jsonWriter.key("AttributeName").value(rangeKeyElement.getAttributeName());
+                    }
+                    if (rangeKeyElement.getAttributeType() != null) {
+                        jsonWriter.key("AttributeType").value(rangeKeyElement.getAttributeType());
+                    }
+                    jsonWriter.endObject();
+                }
+                jsonWriter.endObject();
             }
-            if (createTableRequest != null) {
-                ProvisionedThroughput provisionedThroughputProvisionedThroughput = createTableRequest.getProvisionedThroughput();
-                if (provisionedThroughputProvisionedThroughput != null) {
-                    jsonWriter.key("ProvisionedThroughput").object();
-                    if (provisionedThroughputProvisionedThroughput.getReadCapacityUnits() != null) {
-                        jsonWriter.key("ReadCapacityUnits").value(provisionedThroughputProvisionedThroughput.getReadCapacityUnits());
-                    }
-                    if (provisionedThroughputProvisionedThroughput.getWriteCapacityUnits() != null) {
-                        jsonWriter.key("WriteCapacityUnits").value(provisionedThroughputProvisionedThroughput.getWriteCapacityUnits());
-                    }
-                    jsonWriter.endObject();
+            ProvisionedThroughput provisionedThroughput = createTableRequest.getProvisionedThroughput();
+            if (provisionedThroughput != null) {
+
+                jsonWriter.key("ProvisionedThroughput");
+                jsonWriter.object();
+
+                if (provisionedThroughput.getReadCapacityUnits() != null) {
+                    jsonWriter.key("ReadCapacityUnits").value(provisionedThroughput.getReadCapacityUnits());
                 }
+                if (provisionedThroughput.getWriteCapacityUnits() != null) {
+                    jsonWriter.key("WriteCapacityUnits").value(provisionedThroughput.getWriteCapacityUnits());
+                }
+                jsonWriter.endObject();
             }
 
     	    jsonWriter.endObject();
+        	
 
     	    String snippet = stringWriter.toString();
     	    byte[] content = snippet.getBytes("UTF-8");
         	request.setContent(new StringInputStream(snippet));
 	        request.addHeader("Content-Length", Integer.toString(content.length));
-            return request;
         } catch(Throwable t) {
           throw new AmazonClientException("Unable to marshall request to JSON: " + t.getMessage(), t);
         }
+        
+
+        return request;
+    }
+
+    private String getString(String s) {
+        if (s == null) return "";
+        return s;
     }
 }

@@ -43,49 +43,30 @@ import com.amazonaws.services.cloudwatch.model.transform.*;
  * completes.
  * <p>
  * Amazon CloudWatch <p>
- * This is the <i>Amazon CloudWatch API Reference</i> . This guide
- * provides detailed information about Amazon CloudWatch actions, data
- * types, parameters, and errors. For detailed information about Amazon
- * CloudWatch features and their associated API calls, go to the <a
- * ://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide">
- * Amazon CloudWatch Developer Guide </a> .
+ * This is the <i>Amazon CloudWatch API Reference</i> . This guide provides detailed information about Amazon CloudWatch actions, data types, parameters,
+ * and errors. For detailed information about Amazon CloudWatch features and their associated API calls, go to the <a
+ * href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide"> Amazon CloudWatch Developer Guide </a> .
  * </p>
  * <p>
- * Amazon CloudWatch is a web service that enables you to publish,
- * monitor, and manage various metrics, as well as configure alarm
- * actions based on data from metrics. For more information about this
- * product go to <a href="http://aws.amazon.com/cloudwatch">
- * http://aws.amazon.com/cloudwatch </a> .
+ * Amazon CloudWatch is a web service that enables you to publish, monitor, and manage various metrics, as well as configure alarm actions based on data
+ * from metrics. For more information about this product go to <a href="http://aws.amazon.com/cloudwatch"> http://aws.amazon.com/cloudwatch </a> .
  * </p>
  * <p>
- * Use the following links to get started using the <i>Amazon CloudWatch
- * API Reference</i> :
+ * Use the following links to get started using the <i>Amazon CloudWatch API Reference</i> :
  * </p>
  * 
  * <ul>
- * <li> <a
- * ervices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html">
- * Actions </a> : An alphabetical list of all Amazon CloudWatch
- * actions.</li>
- * <li> <a
- * nwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html">
- * Data Types </a> : An alphabetical list of all Amazon CloudWatch data
- * types.</li>
- * <li> <a
- * vices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html">
- * Common Parameters </a> : Parameters that all Query actions can
- * use.</li>
- * <li> <a
- * bservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html">
- * Common Errors </a> : Client and server errors that all actions can
- * return.</li>
- * <li> <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> : Itemized regions and endpoints for all
- * AWS products.</li>
- * <li> <a
- * href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl">
- * WSDL Location </a> :
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Operations.html"> Actions </a> : An alphabetical list of all
+ * Amazon CloudWatch actions.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/API_Types.html"> Data Types </a> : An alphabetical list of all
+ * Amazon CloudWatch data types.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonParameters.html"> Common Parameters </a> : Parameters that
+ * all Query actions can use.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/APIReference/CommonErrors.html"> Common Errors </a> : Client and server
+ * errors that all actions can return.</li>
+ * <li> <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html"> Regions and Endpoints </a> : Itemized regions and endpoints
+ * for all AWS products.</li>
+ * <li> <a href="http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl"> WSDL Location </a> :
  * http://monitoring.amazonaws.com/doc/2010-08-01/CloudWatch.wsdl</li>
  * 
  * </ul>
@@ -100,11 +81,55 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
-    private QueryStringSigner signer;
+    private AWS4Signer signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudWatch.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudWatchClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonCloudWatch.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonCloudWatch
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonCloudWatchClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -141,7 +166,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AmazonCloudWatch using the specified AWS account credentials provider.
@@ -150,7 +175,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -167,7 +192,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -180,7 +205,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new InvalidNextTokenExceptionUnmarshaller());
         exceptionUnmarshallers.add(new InvalidParameterCombinationExceptionUnmarshaller());
         exceptionUnmarshallers.add(new InvalidFormatExceptionUnmarshaller());
@@ -193,13 +218,16 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller());
         setEndpoint("monitoring.amazonaws.com");
 
-        signer = new QueryStringSigner();
+        signer = new AWS4Signer();
+        
+        signer.setServiceName("monitoring");
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/cloudwatch/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -670,7 +698,47 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
         return describeAlarmHistory(new DescribeAlarmHistoryRequest());
     }
     
-
+    /**
+     * Overrides the default endpoint for this client ("https://monitoring.amazonaws.com") and explicitly provides
+     * an AWS region ID and AWS service name to use when the client calculates a signature
+     * for requests.  In almost all cases, this region ID and service name
+     * are automatically determined from the endpoint, and callers should use the simpler
+     * one-argument form of setEndpoint instead of this method.
+     * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
+     * Callers can pass in just the endpoint (ex: "monitoring.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://monitoring.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "monitoring.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://monitoring.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param serviceName
+     *            The name of the AWS service to use when signing requests.
+     * @param regionId
+     *            The ID of the region in which this service resides.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String serviceName, String regionId) throws IllegalArgumentException {
+        setEndpoint(endpoint);
+        signer.setServiceName(serviceName);
+        signer.setRegionName(regionId);
+    }
+    
 
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
@@ -698,7 +766,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -710,7 +778,7 @@ public class AmazonCloudWatchClient extends AmazonWebServiceClient implements Am
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

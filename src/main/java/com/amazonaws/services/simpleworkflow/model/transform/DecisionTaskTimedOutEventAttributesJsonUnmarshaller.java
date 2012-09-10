@@ -34,6 +34,9 @@ public class DecisionTaskTimedOutEventAttributesJsonUnmarshaller implements Unma
 
     public DecisionTaskTimedOutEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         DecisionTaskTimedOutEventAttributes decisionTaskTimedOutEventAttributes = new DecisionTaskTimedOutEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class DecisionTaskTimedOutEventAttributesJsonUnmarshaller implements Unma
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return decisionTaskTimedOutEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("timeoutType", targetDepth)) {
                     context.nextToken();
@@ -57,12 +61,14 @@ public class DecisionTaskTimedOutEventAttributesJsonUnmarshaller implements Unma
                     decisionTaskTimedOutEventAttributes.setStartedEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return decisionTaskTimedOutEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return decisionTaskTimedOutEventAttributes;
     }
 
     private static DecisionTaskTimedOutEventAttributesJsonUnmarshaller instance;

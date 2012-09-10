@@ -34,6 +34,9 @@ public class DomainInfosJsonUnmarshaller implements Unmarshaller<DomainInfos, Js
 
     public DomainInfos unmarshall(JsonUnmarshallerContext context) throws Exception {
         DomainInfos domainInfos = new DomainInfos();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class DomainInfosJsonUnmarshaller implements Unmarshaller<DomainInfos, Js
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return domainInfos;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("domainInfos", targetDepth)) {
                     domainInfos.setDomainInfos(new ListUnmarshaller<DomainInfo>(DomainInfoJsonUnmarshaller.getInstance()).unmarshall(context));
@@ -52,12 +56,14 @@ public class DomainInfosJsonUnmarshaller implements Unmarshaller<DomainInfos, Js
                     domainInfos.setNextPageToken(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return domainInfos;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return domainInfos;
     }
 
     private static DomainInfosJsonUnmarshaller instance;

@@ -21,36 +21,26 @@ import com.amazonaws.services.autoscaling.model.*;
 /**
  * Interface for accessing AmazonAutoScaling.
  * Auto Scaling <p>
- * This is the <i>Auto Scaling API Reference</i> . This guide provides
- * detailed information about Auto Scaling actions, data types,
- * parameters, and errors. For detailed information about Auto Scaling
- * features and their associated API calls, go to the <a
- * http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/">
- * Auto Scaling Developer Guide </a> .
+ * This guide provides detailed information about Auto Scaling actions, data types, parameters, and errors. For detailed information about Auto Scaling
+ * features and their associated API calls, go to the <a href="http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/"> Auto Scaling
+ * Developer Guide </a> .
  * </p>
  * <p>
- * Auto Scaling is a web service designed to automatically launch or
- * terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on
- * user-defined policies, schedules, and health checks. This service is
- * used in conjunction with Amazon CloudWatch and Elastic Load Balancing
- * services.
+ * Auto Scaling is a web service designed to automatically launch or terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on user-defined
+ * policies, schedules, and health checks. This service is used in conjunction with Amazon CloudWatch and Elastic Load Balancing services.
  * </p>
  * <p>
  * This reference is based on the current WSDL, which is available at:
  * </p>
  * <p>
- * <a
- * ef="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl">
- * http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
+ * <a href="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl"> http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
  * </p>
  * <p>
  * <b>Endpoints</b>
  * </p>
  * <p>
- * For information about this product's regions and endpoints, go to <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> in the Amazon Web Services General
- * Reference.
+ * For information about this product's regions and endpoints, go to <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
+ * Regions and Endpoints </a> in the Amazon Web Services General Reference.
  * </p>
  */
 public interface AmazonAutoScaling {
@@ -59,8 +49,8 @@ public interface AmazonAutoScaling {
      * Overrides the default endpoint for this client ("https://autoscaling.amazonaws.com").
      * Callers can use this method to control which AWS region they want to work with.
      * <p>
-     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
-     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * Callers can pass in just the endpoint (ex: "autoscaling.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://autoscaling.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
@@ -70,8 +60,8 @@ public interface AmazonAutoScaling {
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
      *
      * @param endpoint
-     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
-     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            The endpoint (ex: "autoscaling.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://autoscaling.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
      *
@@ -781,10 +771,15 @@ public interface AmazonAutoScaling {
      * call returns. Triggers that are currently in progress aren't affected.
      * </p>
      * <p>
-     * <b>NOTE:</b> If the new values are specified for the MinSize or
-     * MaxSize parameters, then there will be an implicit call to
-     * SetDesiredCapacity to set the group to the new MaxSize. All optional
-     * parameters are left unchanged if not passed in the request.
+     * <b>NOTE:</b> If a new value is specified for MinSize without
+     * specifying the value for DesiredCapacity, and if the new MinSize is
+     * larger than the current size of the Auto Scaling Group, there will be
+     * an implicit call to SetDesiredCapacity to set the group to the new
+     * MinSize. If a new value is specified for MaxSize without specifying
+     * the value for DesiredCapacity, and the new MaxSize is smaller than the
+     * current size of the Auto Scaling Group, there will be an implicit call
+     * to SetDesiredCapacity to set the group to the new MaxSize. All other
+     * optional parameters are left unchanged if not passed in the request.
      * </p>
      *
      * @param updateAutoScalingGroupRequest Container for the necessary

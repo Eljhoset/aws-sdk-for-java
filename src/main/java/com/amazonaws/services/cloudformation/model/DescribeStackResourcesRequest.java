@@ -18,28 +18,27 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStackResources(DescribeStackResourcesRequest) DescribeStackResources operation}.
  * <p>
- * Returns AWS resource descriptions for running and deleted stacks. If
- * <code>StackName</code> is specified, all the associated resources that
- * are part of the stack are returned. If <code>PhysicalResourceId</code>
- * is specified, all the associated resources of the stack the resource
- * belongs to are returned.
+ * Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part
+ * of the stack are returned. If <code>PhysicalResourceId</code> is specified, all the associated resources of the stack the resource belongs to are
+ * returned.
  * </p>
  * <p>
- * For deleted stacks, DescribeStackResources returns resource
- * information for up to 90 days after the stack has been deleted.
+ * For deleted stacks, DescribeStackResources returns resource information for up to 90 days after the stack has been deleted.
  * </p>
  * <p>
- * You must specify <code>StackName</code> or
- * <code>PhysicalResourceId.</code> In addition, you can specify
- * <code>LogicalResourceId</code> to filter the returned result. For more
- * information about resources, the <code>LogicalResourceId</code> and
- * <code>PhysicalResourceId</code> , go to the <a
- * http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide">
- * AWS CloudFormation User Guide </a> .
+ * If you do not provide either a stack or resource id, information for all stacks and resources will be returned, up to a limit of 100 records.
  * </p>
  * <p>
- * <b>NOTE:</b> A ValidationError is returned if you specify both
- * StackName and PhysicalResourceId in the same request.
+ * <b>NOTE:</b> To list more than 100 resources use ListStackResources instead.
+ * </p>
+ * <p>
+ * You can specify either <code>StackName</code> or <code>PhysicalResourceId.</code> , but not both. In addition, you can specify
+ * <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and
+ * <code>PhysicalResourceId</code> , go to the <a href="http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide"> AWS CloudFormation User
+ * Guide </a> .
+ * </p>
+ * <p>
+ * <b>NOTE:</b> A ValidationError is returned if you specify both StackName and PhysicalResourceId in the same request.
  * </p>
  *
  * @see com.amazonaws.services.cloudformation.AmazonCloudFormation#describeStackResources(DescribeStackResourcesRequest)
@@ -47,59 +46,59 @@ import com.amazonaws.AmazonWebServiceRequest;
 public class DescribeStackResourcesRequest extends AmazonWebServiceRequest {
 
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      */
     private String stackName;
 
     /**
-     * The logical name of the resource as specified in the
-     * template.<br></br> Default: There is on default value.
+     * The logical name of the resource as specified in the template.
+     * <p>Default: There is no default value.
      */
     private String logicalResourceId;
 
     /**
      * The name or unique identifier that corresponds to a physical instance
-     * ID of a resource supported by AWS CloudFormation. <p> For example, for
+     * ID of a resource supported by AWS CloudFormation. <p>For example, for
      * an Amazon Elastic Compute Cloud (EC2) instance,
      * <code>PhysicalResourceId</code> corresponds to the
      * <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      * to <code>DescribeStackResources</code> to find which stack the
      * instance belongs to and what other resources are part of the stack.
-     * <p> Default: There is no default value.
+     * <p>Default: There is no default value.
      */
     private String physicalResourceId;
 
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @return The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @return The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public String getStackName() {
         return stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      *
-     * @param stackName The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      */
     public void setStackName(String stackName) {
         this.stackName = stackName;
     }
     
     /**
-     * The name or the unique identifier associated with the stack. <p>
-     * Default: There is no default value.
+     * The name or the unique identifier associated with the stack.
+     * <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param stackName The name or the unique identifier associated with the stack. <p>
-     *         Default: There is no default value.
+     * @param stackName The name or the unique identifier associated with the stack.
+     *         <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -111,35 +110,35 @@ public class DescribeStackResourcesRequest extends AmazonWebServiceRequest {
     
     
     /**
-     * The logical name of the resource as specified in the
-     * template.<br></br> Default: There is on default value.
+     * The logical name of the resource as specified in the template.
+     * <p>Default: There is no default value.
      *
-     * @return The logical name of the resource as specified in the
-     *         template.<br></br> Default: There is on default value.
+     * @return The logical name of the resource as specified in the template.
+     *         <p>Default: There is no default value.
      */
     public String getLogicalResourceId() {
         return logicalResourceId;
     }
     
     /**
-     * The logical name of the resource as specified in the
-     * template.<br></br> Default: There is on default value.
+     * The logical name of the resource as specified in the template.
+     * <p>Default: There is no default value.
      *
-     * @param logicalResourceId The logical name of the resource as specified in the
-     *         template.<br></br> Default: There is on default value.
+     * @param logicalResourceId The logical name of the resource as specified in the template.
+     *         <p>Default: There is no default value.
      */
     public void setLogicalResourceId(String logicalResourceId) {
         this.logicalResourceId = logicalResourceId;
     }
     
     /**
-     * The logical name of the resource as specified in the
-     * template.<br></br> Default: There is on default value.
+     * The logical name of the resource as specified in the template.
+     * <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
-     * @param logicalResourceId The logical name of the resource as specified in the
-     *         template.<br></br> Default: There is on default value.
+     * @param logicalResourceId The logical name of the resource as specified in the template.
+     *         <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 
@@ -152,22 +151,22 @@ public class DescribeStackResourcesRequest extends AmazonWebServiceRequest {
     
     /**
      * The name or unique identifier that corresponds to a physical instance
-     * ID of a resource supported by AWS CloudFormation. <p> For example, for
+     * ID of a resource supported by AWS CloudFormation. <p>For example, for
      * an Amazon Elastic Compute Cloud (EC2) instance,
      * <code>PhysicalResourceId</code> corresponds to the
      * <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      * to <code>DescribeStackResources</code> to find which stack the
      * instance belongs to and what other resources are part of the stack.
-     * <p> Default: There is no default value.
+     * <p>Default: There is no default value.
      *
      * @return The name or unique identifier that corresponds to a physical instance
-     *         ID of a resource supported by AWS CloudFormation. <p> For example, for
+     *         ID of a resource supported by AWS CloudFormation. <p>For example, for
      *         an Amazon Elastic Compute Cloud (EC2) instance,
      *         <code>PhysicalResourceId</code> corresponds to the
      *         <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      *         to <code>DescribeStackResources</code> to find which stack the
      *         instance belongs to and what other resources are part of the stack.
-     *         <p> Default: There is no default value.
+     *         <p>Default: There is no default value.
      */
     public String getPhysicalResourceId() {
         return physicalResourceId;
@@ -175,22 +174,22 @@ public class DescribeStackResourcesRequest extends AmazonWebServiceRequest {
     
     /**
      * The name or unique identifier that corresponds to a physical instance
-     * ID of a resource supported by AWS CloudFormation. <p> For example, for
+     * ID of a resource supported by AWS CloudFormation. <p>For example, for
      * an Amazon Elastic Compute Cloud (EC2) instance,
      * <code>PhysicalResourceId</code> corresponds to the
      * <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      * to <code>DescribeStackResources</code> to find which stack the
      * instance belongs to and what other resources are part of the stack.
-     * <p> Default: There is no default value.
+     * <p>Default: There is no default value.
      *
      * @param physicalResourceId The name or unique identifier that corresponds to a physical instance
-     *         ID of a resource supported by AWS CloudFormation. <p> For example, for
+     *         ID of a resource supported by AWS CloudFormation. <p>For example, for
      *         an Amazon Elastic Compute Cloud (EC2) instance,
      *         <code>PhysicalResourceId</code> corresponds to the
      *         <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      *         to <code>DescribeStackResources</code> to find which stack the
      *         instance belongs to and what other resources are part of the stack.
-     *         <p> Default: There is no default value.
+     *         <p>Default: There is no default value.
      */
     public void setPhysicalResourceId(String physicalResourceId) {
         this.physicalResourceId = physicalResourceId;
@@ -198,24 +197,24 @@ public class DescribeStackResourcesRequest extends AmazonWebServiceRequest {
     
     /**
      * The name or unique identifier that corresponds to a physical instance
-     * ID of a resource supported by AWS CloudFormation. <p> For example, for
+     * ID of a resource supported by AWS CloudFormation. <p>For example, for
      * an Amazon Elastic Compute Cloud (EC2) instance,
      * <code>PhysicalResourceId</code> corresponds to the
      * <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      * to <code>DescribeStackResources</code> to find which stack the
      * instance belongs to and what other resources are part of the stack.
-     * <p> Default: There is no default value.
+     * <p>Default: There is no default value.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param physicalResourceId The name or unique identifier that corresponds to a physical instance
-     *         ID of a resource supported by AWS CloudFormation. <p> For example, for
+     *         ID of a resource supported by AWS CloudFormation. <p>For example, for
      *         an Amazon Elastic Compute Cloud (EC2) instance,
      *         <code>PhysicalResourceId</code> corresponds to the
      *         <code>InstanceId</code>. You can pass the EC2 <code>InstanceId</code>
      *         to <code>DescribeStackResources</code> to find which stack the
      *         instance belongs to and what other resources are part of the stack.
-     *         <p> Default: There is no default value.
+     *         <p>Default: There is no default value.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 

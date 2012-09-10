@@ -34,6 +34,9 @@ public class TimerFiredEventAttributesJsonUnmarshaller implements Unmarshaller<T
 
     public TimerFiredEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         TimerFiredEventAttributes timerFiredEventAttributes = new TimerFiredEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class TimerFiredEventAttributesJsonUnmarshaller implements Unmarshaller<T
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return timerFiredEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("timerId", targetDepth)) {
                     context.nextToken();
@@ -53,12 +57,14 @@ public class TimerFiredEventAttributesJsonUnmarshaller implements Unmarshaller<T
                     timerFiredEventAttributes.setStartedEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return timerFiredEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return timerFiredEventAttributes;
     }
 
     private static TimerFiredEventAttributesJsonUnmarshaller instance;

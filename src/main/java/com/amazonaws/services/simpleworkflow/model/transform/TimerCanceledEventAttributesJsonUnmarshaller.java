@@ -34,6 +34,9 @@ public class TimerCanceledEventAttributesJsonUnmarshaller implements Unmarshalle
 
     public TimerCanceledEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         TimerCanceledEventAttributes timerCanceledEventAttributes = new TimerCanceledEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class TimerCanceledEventAttributesJsonUnmarshaller implements Unmarshalle
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return timerCanceledEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("timerId", targetDepth)) {
                     context.nextToken();
@@ -57,12 +61,14 @@ public class TimerCanceledEventAttributesJsonUnmarshaller implements Unmarshalle
                     timerCanceledEventAttributes.setDecisionTaskCompletedEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return timerCanceledEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return timerCanceledEventAttributes;
     }
 
     private static TimerCanceledEventAttributesJsonUnmarshaller instance;

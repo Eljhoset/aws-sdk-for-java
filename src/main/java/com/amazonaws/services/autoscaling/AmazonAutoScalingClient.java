@@ -43,36 +43,26 @@ import com.amazonaws.services.autoscaling.model.transform.*;
  * completes.
  * <p>
  * Auto Scaling <p>
- * This is the <i>Auto Scaling API Reference</i> . This guide provides
- * detailed information about Auto Scaling actions, data types,
- * parameters, and errors. For detailed information about Auto Scaling
- * features and their associated API calls, go to the <a
- * http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/">
- * Auto Scaling Developer Guide </a> .
+ * This guide provides detailed information about Auto Scaling actions, data types, parameters, and errors. For detailed information about Auto Scaling
+ * features and their associated API calls, go to the <a href="http://docs.amazonwebservices.com/AutoScaling/latest/DeveloperGuide/"> Auto Scaling
+ * Developer Guide </a> .
  * </p>
  * <p>
- * Auto Scaling is a web service designed to automatically launch or
- * terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on
- * user-defined policies, schedules, and health checks. This service is
- * used in conjunction with Amazon CloudWatch and Elastic Load Balancing
- * services.
+ * Auto Scaling is a web service designed to automatically launch or terminate Amazon Elastic Compute Cloud (Amazon EC2) instances based on user-defined
+ * policies, schedules, and health checks. This service is used in conjunction with Amazon CloudWatch and Elastic Load Balancing services.
  * </p>
  * <p>
  * This reference is based on the current WSDL, which is available at:
  * </p>
  * <p>
- * <a
- * ef="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl">
- * http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
+ * <a href="http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl"> http://autoscaling.amazonaws.com/doc/2011-01-01/AutoScaling.wsdl </a>
  * </p>
  * <p>
  * <b>Endpoints</b>
  * </p>
  * <p>
- * For information about this product's regions and endpoints, go to <a
- * //docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
- * Regions and Endpoints </a> in the Amazon Web Services General
- * Reference.
+ * For information about this product's regions and endpoints, go to <a href="http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html">
+ * Regions and Endpoints </a> in the Amazon Web Services General Reference.
  * </p>
  */
 public class AmazonAutoScalingClient extends AmazonWebServiceClient implements AmazonAutoScaling {
@@ -85,11 +75,55 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      */
     protected final List<Unmarshaller<AmazonServiceException, Node>> exceptionUnmarshallers
             = new ArrayList<Unmarshaller<AmazonServiceException, Node>>();
-    
+
     
     /** AWS signer for authenticating requests. */
-    private QueryStringSigner signer;
+    private AWS4Signer signer;
 
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonAutoScalingClient() {
+        this(new DefaultAWSCredentialsProviderChain(), new ClientConfiguration());
+    }
+
+    /**
+     * Constructs a new client to invoke service methods on
+     * AmazonAutoScaling.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonAutoScaling
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonAutoScalingClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration);
+    }
 
     /**
      * Constructs a new client to invoke service methods on
@@ -126,7 +160,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         this.awsCredentialsProvider = new StaticCredentialsProvider(awsCredentials);
         init();
     }
-    
+
     /**
      * Constructs a new client to invoke service methods on
      * AmazonAutoScaling using the specified AWS account credentials provider.
@@ -135,7 +169,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      */
@@ -152,7 +186,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * All service calls made using this new client object are blocking, and will not
      * return until the service call completes.
      *
-     * @param awsCredentialsProvider 
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration The client configuration options controlling how this
@@ -165,7 +199,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         init();
     }
 
-    private void init() { 
+    private void init() {
         exceptionUnmarshallers.add(new InvalidNextTokenExceptionUnmarshaller());
         exceptionUnmarshallers.add(new ScalingActivityInProgressExceptionUnmarshaller());
         exceptionUnmarshallers.add(new LimitExceededExceptionUnmarshaller());
@@ -175,13 +209,16 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         exceptionUnmarshallers.add(new StandardErrorUnmarshaller());
         setEndpoint("autoscaling.amazonaws.com");
 
-        signer = new QueryStringSigner();
+        signer = new AWS4Signer();
+        
+        signer.setServiceName("autoscaling");
+        
 
         HandlerChainFactory chainFactory = new HandlerChainFactory();
 		requestHandlers.addAll(chainFactory.newRequestHandlerChain(
                 "/com/amazonaws/services/autoscaling/request.handlers"));
     }
-    
+
     
     /**
      * <p>
@@ -959,10 +996,15 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
      * call returns. Triggers that are currently in progress aren't affected.
      * </p>
      * <p>
-     * <b>NOTE:</b> If the new values are specified for the MinSize or
-     * MaxSize parameters, then there will be an implicit call to
-     * SetDesiredCapacity to set the group to the new MaxSize. All optional
-     * parameters are left unchanged if not passed in the request.
+     * <b>NOTE:</b> If a new value is specified for MinSize without
+     * specifying the value for DesiredCapacity, and if the new MinSize is
+     * larger than the current size of the Auto Scaling Group, there will be
+     * an implicit call to SetDesiredCapacity to set the group to the new
+     * MinSize. If a new value is specified for MaxSize without specifying
+     * the value for DesiredCapacity, and the new MaxSize is smaller than the
+     * current size of the Auto Scaling Group, there will be an implicit call
+     * to SetDesiredCapacity to set the group to the new MaxSize. All other
+     * optional parameters are left unchanged if not passed in the request.
      * </p>
      *
      * @param updateAutoScalingGroupRequest Container for the necessary
@@ -1536,7 +1578,47 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         return describeMetricCollectionTypes(new DescribeMetricCollectionTypesRequest());
     }
     
-
+    /**
+     * Overrides the default endpoint for this client ("https://autoscaling.amazonaws.com") and explicitly provides
+     * an AWS region ID and AWS service name to use when the client calculates a signature
+     * for requests.  In almost all cases, this region ID and service name
+     * are automatically determined from the endpoint, and callers should use the simpler
+     * one-argument form of setEndpoint instead of this method.
+     * <p>
+     * <b>This method is not threadsafe. Endpoints should be configured when the
+     * client is created and before any service requests are made. Changing it
+     * afterwards creates inevitable race conditions for any service requests in
+     * transit.</b>
+     * <p>
+     * Callers can pass in just the endpoint (ex: "autoscaling.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://autoscaling.amazonaws.com"). If the
+     * protocol is not specified here, the default protocol from this client's
+     * {@link ClientConfiguration} will be used, which by default is HTTPS.
+     * <p>
+     * For more information on using AWS regions with the AWS SDK for Java, and
+     * a complete list of all available endpoints for all AWS services, see:
+     * <a href="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912">
+     * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
+     *
+     * @param endpoint
+     *            The endpoint (ex: "autoscaling.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://autoscaling.amazonaws.com") of
+     *            the region specific AWS endpoint this client will communicate
+     *            with.
+     * @param serviceName
+     *            The name of the AWS service to use when signing requests.
+     * @param regionId
+     *            The ID of the region in which this service resides.
+     *
+     * @throws IllegalArgumentException
+     *             If any problems are detected with the specified endpoint.
+     */
+    public void setEndpoint(String endpoint, String serviceName, String regionId) throws IllegalArgumentException {
+        setEndpoint(endpoint);
+        signer.setServiceName(serviceName);
+        signer.setRegionName(regionId);
+    }
+    
 
     /**
      * Returns additional metadata for a previously executed successful, request, typically used for
@@ -1564,7 +1646,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
             request.addParameter(entry.getKey(), entry.getValue());
         }
 
-        AWSCredentials credentials = awsCredentialsProvider.getCredentials(); 
+        AWSCredentials credentials = awsCredentialsProvider.getCredentials();
         AmazonWebServiceRequest originalRequest = request.getOriginalRequest();
         if (originalRequest != null && originalRequest.getRequestCredentials() != null) {
         	credentials = originalRequest.getRequestCredentials();
@@ -1576,7 +1658,7 @@ public class AmazonAutoScalingClient extends AmazonWebServiceClient implements A
         
         StaxResponseHandler<X> responseHandler = new StaxResponseHandler<X>(unmarshaller);
         DefaultErrorResponseHandler errorResponseHandler = new DefaultErrorResponseHandler(exceptionUnmarshallers);
-        
+
         return (X)client.execute(request, responseHandler, errorResponseHandler, executionContext);
     }
 }

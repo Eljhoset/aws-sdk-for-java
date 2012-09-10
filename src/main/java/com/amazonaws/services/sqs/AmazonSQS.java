@@ -21,26 +21,18 @@ import com.amazonaws.services.sqs.model.*;
 /**
  * Interface for accessing AmazonSQS.
  * Amazon Simple Queue Service <p>
- * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly
- * scalable, hosted queue for storing messages as they travel between
- * computers. By using Amazon SQS, developers can simply move data
- * between distributed components of their applications that perform
- * different tasks, without losing messages or requiring each component
- * to be always available. Amazon SQS makes it easy to build an automated
- * workflow, working in close conjunction with the Amazon Elastic Compute
- * Cloud (Amazon EC2) and the other AWS infrastructure web services.
+ * Amazon Simple Queue Service (Amazon SQS) offers a reliable, highly scalable, hosted queue for storing messages as they travel between computers. By
+ * using Amazon SQS, developers can simply move data between distributed components of their applications that perform different tasks, without losing
+ * messages or requiring each component to be always available. Amazon SQS makes it easy to build an automated workflow, working in close conjunction
+ * with the Amazon Elastic Compute Cloud (Amazon EC2) and the other AWS infrastructure web services.
  * </p>
  * <p>
- * Amazon SQS works by exposing Amazon's web-scale messaging
- * infrastructure as a web service. Any computer on the Internet can add
- * or read messages without any installed software or special firewall
- * configurations. Components of applications using Amazon SQS can run
- * independently, and do not need to be on the same network, developed
- * with the same technologies, or running at the same time.
+ * Amazon SQS works by exposing Amazon's web-scale messaging infrastructure as a web service. Any computer on the Internet can add or read messages
+ * without any installed software or special firewall configurations. Components of applications using Amazon SQS can run independently, and do not need
+ * to be on the same network, developed with the same technologies, or running at the same time.
  * </p>
  * <p>
- * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/
- * </a> for more information.
+ * Visit <a href="http://aws.amazon.com/sqs/"> http://aws.amazon.com/sqs/ </a> for more information.
  * </p>
  */
 public interface AmazonSQS {
@@ -49,8 +41,8 @@ public interface AmazonSQS {
      * Overrides the default endpoint for this client ("https://queue.amazonaws.com").
      * Callers can use this method to control which AWS region they want to work with.
      * <p>
-     * Callers can pass in just the endpoint (ex: "ec2.amazonaws.com") or a full
-     * URL, including the protocol (ex: "https://ec2.amazonaws.com"). If the
+     * Callers can pass in just the endpoint (ex: "queue.amazonaws.com") or a full
+     * URL, including the protocol (ex: "https://queue.amazonaws.com"). If the
      * protocol is not specified here, the default protocol from this client's
      * {@link ClientConfiguration} will be used, which by default is HTTPS.
      * <p>
@@ -60,8 +52,8 @@ public interface AmazonSQS {
      * http://developer.amazonwebservices.com/connect/entry.jspa?externalID=3912</a>
      *
      * @param endpoint
-     *            The endpoint (ex: "ec2.amazonaws.com") or a full URL,
-     *            including the protocol (ex: "https://ec2.amazonaws.com") of
+     *            The endpoint (ex: "queue.amazonaws.com") or a full URL,
+     *            including the protocol (ex: "https://queue.amazonaws.com") of
      *            the region specific AWS endpoint this client will communicate
      *            with.
      *

@@ -13,7 +13,7 @@
  * permissions and limitations under the License.
  */
 package com.amazonaws.services.dynamodb;
-            
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +24,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 
 import com.amazonaws.services.dynamodb.model.*;
 
@@ -34,37 +35,79 @@ import com.amazonaws.services.dynamodb.model.*;
  * Callers must use the Future object to determine when the service call has actually
  * completed.
  * <p>
- * Amazon DynamoDB is a fast, highly scalable, highly available,
- * cost-effective non-relational database service.
+ * Amazon DynamoDB is a fast, highly scalable, highly available, cost-effective non-relational database service.
  * </p>
  * <p>
- * Amazon DynamoDB removes traditional scalability limitations on data
- * storage while maintaining low latency and predictable performance.
- * </p> 
- */       
+ * Amazon DynamoDB removes traditional scalability limitations on data storage while maintaining low latency and predictable performance.
+ * </p>
+ */
 public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
-        implements AmazonDynamoDBAsync { 
+        implements AmazonDynamoDBAsync {
 
     /**
      * Executor service for executing asynchronous requests.
      */
     private ExecutorService executorService;
 
-    
+
     /**
-     * Constructs a new asynchronous client to invoke service methods on 
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonDynamoDB.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonDynamoDBAsyncClient() {
+        this(new DefaultAWSCredentialsProviderChain());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
+     * AmazonDynamoDB.  A credentials provider chain will be used
+     * that searches for credentials in this order:
+     * <ul>
+     *  <li> Environment Variables - AWS_ACCESS_KEY_ID and AWS_SECRET_KEY </li>
+     *  <li> Java System Properties - aws.accessKeyId and aws.secretKey </li>
+     *  <li> Instance profile credentials delivered through the Amazon EC2 metadata service </li>
+     * </ul>
+     *
+     * <p>
+     * All service calls made using this new client object are blocking, and will not
+     * return until the service call completes.
+     *
+     * @param clientConfiguration The client configuration options controlling how this
+     *                       client connects to AmazonDynamoDB
+     *                       (ex: proxy settings, retry counts, etc.).
+     *
+     * @see DefaultAWSCredentialsProvider
+     */
+    public AmazonDynamoDBAsyncClient(ClientConfiguration clientConfiguration) {
+        this(new DefaultAWSCredentialsProviderChain(), clientConfiguration, Executors.newCachedThreadPool());
+    }
+
+    /**
+     * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials.
-     * Default client settings will be used, and a default cached thread pool will be 
+     * Default client settings will be used, and a default cached thread pool will be
      * created for executing the asynchronous tasks.
      *
      * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
+     *
      * @param awsCredentials The AWS credentials (access key ID and secret key) to use
      *                       when authenticating with AWS services.
-     */                                      
+     */
     public AmazonDynamoDBAsyncClient(AWSCredentials awsCredentials) {
         this(awsCredentials, Executors.newCachedThreadPool());
     }
@@ -73,13 +116,13 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials
      * and executor service.  Default client settings will be used.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param executorService
@@ -90,18 +133,18 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
         super(awsCredentials);
         this.executorService = executorService;
     }
-     
+
     /**
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials,
      * executor service, and client configuration options.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentials 
+     *
+     * @param awsCredentials
      *            The AWS credentials (access key ID and secret key) to use
      *            when authenticating with AWS services.
      * @param clientConfiguration
@@ -118,35 +161,35 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
     }
 
     /**
-     * Constructs a new asynchronous client to invoke service methods on 
+     * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials provider.
-     * Default client settings will be used, and a default cached thread pool will be 
+     * Default client settings will be used, and a default cached thread pool will be
      * created for executing the asynchronous tasks.
      *
      * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
-     */                                      
+     */
     public AmazonDynamoDBAsyncClient(AWSCredentialsProvider awsCredentialsProvider) {
         this(awsCredentialsProvider, Executors.newCachedThreadPool());
     }
-    
+
     /**
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials provider
      * and executor service.  Default client settings will be used.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param executorService
@@ -161,13 +204,13 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
      * Constructs a new asynchronous client to invoke service methods on
      * AmazonDynamoDB using the specified AWS account credentials
      * provider, executor service, and client configuration options.
-     * 
-     * <p> 
+     *
+     * <p>
      * All calls made using this new client object are non-blocking, and will immediately
      * return a Java Future object that the caller can later check to see if the service
      * call has actually completed.
-     * 
-     * @param awsCredentialsProvider 
+     *
+     * @param awsCredentialsProvider
      *            The AWS credentials provider which will provide credentials
      *            to authenticate requests with AWS services.
      * @param clientConfiguration
@@ -177,7 +220,7 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
      *            The executor service by which all asynchronous requests will
      *            be executed.
      */
-    public AmazonDynamoDBAsyncClient(AWSCredentialsProvider awsCredentialsProvider, 
+    public AmazonDynamoDBAsyncClient(AWSCredentialsProvider awsCredentialsProvider,
                 ClientConfiguration clientConfiguration, ExecutorService executorService) {
         super(awsCredentialsProvider, clientConfiguration);
         this.executorService = executorService;
@@ -187,14 +230,14 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
     /**
      * Returns the executor service used by this async client to execute
      * requests.
-     *   
+     *
      * @return The executor service used by this async client to execute
      *         requests.
      */
     public ExecutorService getExecutorService() {
         return executorService;
     }
-    
+
     /**
      * Shuts down the client, releasing all managed resources. This includes
      * forcibly terminating all pending asynchronous service calls. Clients who
@@ -207,6 +250,205 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
         executorService.shutdownNow();
     }
             
+    /**
+     * <p>
+     * Retrieves a paginated list of table names created by the AWS Account
+     * of the caller in the AWS Region (e.g. <code>us-east-1</code> ).
+     * </p>
+     *
+     * @param listTablesRequest Container for the necessary parameters to
+     *           execute the ListTables operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the
+     *         ListTables service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<ListTablesResult> listTablesAsync(final ListTablesRequest listTablesRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<ListTablesResult>() {
+            public ListTablesResult call() throws Exception {
+                return listTables(listTablesRequest);
+		    }
+		});
+    }
+    
+    /**
+     * <p>
+     * Gets the values of one or more items and its attributes by primary key
+     * (composite primary key, only).
+     * </p>
+     * <p>
+     * Narrow the scope of the query using comparison operators on the
+     * <code>RangeKeyValue</code> of the composite key. Use the
+     * <code>ScanIndexForward</code> parameter to get results in forward or
+     * reverse order by range key.
+     * </p>
+     *
+     * @param queryRequest Container for the necessary parameters to execute
+     *           the Query operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the Query
+     *         service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<QueryResult> queryAsync(final QueryRequest queryRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<QueryResult>() {
+            public QueryResult call() throws Exception {
+                return query(queryRequest);
+		    }
+		});
+    }
+    
+    /**
+     * <p>
+     * Allows to execute a batch of Put and/or Delete Requests for many
+     * tables in a single call. A total of 25 requests are allowed.
+     * </p>
+     * <p>
+     * There are no transaction guarantees provided by this API. It does not
+     * allow conditional puts nor does it support return values.
+     * </p>
+     *
+     * @param batchWriteItemRequest Container for the necessary parameters to
+     *           execute the BatchWriteItem operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the
+     *         BatchWriteItem service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<BatchWriteItemResult> batchWriteItemAsync(final BatchWriteItemRequest batchWriteItemRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<BatchWriteItemResult>() {
+            public BatchWriteItemResult call() throws Exception {
+                return batchWriteItem(batchWriteItemRequest);
+		    }
+		});
+    }
+    
+    /**
+     * <p>
+     * Edits an existing item's attributes.
+     * </p>
+     * <p>
+     * You can perform a conditional update (insert a new attribute
+     * name-value pair if it doesn't exist, or replace an existing name-value
+     * pair if it has certain expected attribute values).
+     * </p>
+     *
+     * @param updateItemRequest Container for the necessary parameters to
+     *           execute the UpdateItem operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the
+     *         UpdateItem service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<UpdateItemResult> updateItemAsync(final UpdateItemRequest updateItemRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<UpdateItemResult>() {
+            public UpdateItemResult call() throws Exception {
+                return updateItem(updateItemRequest);
+		    }
+		});
+    }
+    
+    /**
+     * <p>
+     * Creates a new item, or replaces an old item with a new item (including
+     * all the attributes).
+     * </p>
+     * <p>
+     * If an item already exists in the specified table with the same primary
+     * key, the new item completely replaces the existing item. You can
+     * perform a conditional put (insert a new item if one with the specified
+     * primary key doesn't exist), or replace an existing item if it has
+     * certain attribute values.
+     * </p>
+     *
+     * @param putItemRequest Container for the necessary parameters to
+     *           execute the PutItem operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the PutItem
+     *         service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<PutItemResult> putItemAsync(final PutItemRequest putItemRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<PutItemResult>() {
+            public PutItemResult call() throws Exception {
+                return putItem(putItemRequest);
+		    }
+		});
+    }
+    
+    /**
+     * <p>
+     * Retrieves information about the table, including the current status of
+     * the table, the primary key schema and when the table was created.
+     * </p>
+     * <p>
+     * If the table does not exist, Amazon DynamoDB returns a
+     * <code>ResourceNotFoundException</code> .
+     * </p>
+     *
+     * @param describeTableRequest Container for the necessary parameters to
+     *           execute the DescribeTable operation on AmazonDynamoDB.
+     * 
+     * @return A Java Future object containing the response from the
+     *         DescribeTable service method, as returned by AmazonDynamoDB.
+     *
+     * @throws AmazonClientException
+     *             If any internal errors are encountered inside the client while
+     *             attempting to make the request or handle the response.  For example
+     *             if a network connection is not available.
+     * @throws AmazonServiceException
+     *             If an error response is returned by AmazonDynamoDB indicating
+     *             either a problem with the data in the request, or a server side issue.
+     */
+    public Future<DescribeTableResult> describeTableAsync(final DescribeTableRequest describeTableRequest) 
+            throws AmazonServiceException, AmazonClientException {
+        return executorService.submit(new Callable<DescribeTableResult>() {
+            public DescribeTableResult call() throws Exception {
+                return describeTable(describeTableRequest);
+		    }
+		});
+    }
+    
     /**
      * <p>
      * Retrieves one or more items and its attributes by performing a full
@@ -281,103 +523,6 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
     
     /**
      * <p>
-     * Retrieves a paginated list of table names created by the AWS Account
-     * of the caller in the AWS Region (e.g. <code>us-east-1</code> ).
-     * </p>
-     *
-     * @param listTablesRequest Container for the necessary parameters to
-     *           execute the ListTables operation on AmazonDynamoDB.
-     * 
-     * @return A Java Future object containing the response from the
-     *         ListTables service method, as returned by AmazonDynamoDB.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonDynamoDB indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<ListTablesResult> listTablesAsync(final ListTablesRequest listTablesRequest) 
-            throws AmazonServiceException, AmazonClientException {
-        return executorService.submit(new Callable<ListTablesResult>() {
-            public ListTablesResult call() throws Exception {
-                return listTables(listTablesRequest);
-		    }
-		});
-    }
-    
-    /**
-     * <p>
-     * Gets the values of one or more items and its attributes by primary key
-     * (composite primary key, only).
-     * </p>
-     * <p>
-     * Narrow the scope of the query using comparison operators on the
-     * <code>RangeKeyValue</code> of the composite key. Use the
-     * <code>ScanIndexForward</code> parameter to get results in forward or
-     * reverse order by range key.
-     * </p>
-     *
-     * @param queryRequest Container for the necessary parameters to execute
-     *           the Query operation on AmazonDynamoDB.
-     * 
-     * @return A Java Future object containing the response from the Query
-     *         service method, as returned by AmazonDynamoDB.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonDynamoDB indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<QueryResult> queryAsync(final QueryRequest queryRequest) 
-            throws AmazonServiceException, AmazonClientException {
-        return executorService.submit(new Callable<QueryResult>() {
-            public QueryResult call() throws Exception {
-                return query(queryRequest);
-		    }
-		});
-    }
-    
-    /**
-     * <p>
-     * Edits an existing item's attributes.
-     * </p>
-     * <p>
-     * You can perform a conditional update (insert a new attribute
-     * name-value pair if it doesn't exist, or replace an existing name-value
-     * pair if it has certain expected attribute values).
-     * </p>
-     *
-     * @param updateItemRequest Container for the necessary parameters to
-     *           execute the UpdateItem operation on AmazonDynamoDB.
-     * 
-     * @return A Java Future object containing the response from the
-     *         UpdateItem service method, as returned by AmazonDynamoDB.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonDynamoDB indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<UpdateItemResult> updateItemAsync(final UpdateItemRequest updateItemRequest) 
-            throws AmazonServiceException, AmazonClientException {
-        return executorService.submit(new Callable<UpdateItemResult>() {
-            public UpdateItemResult call() throws Exception {
-                return updateItem(updateItemRequest);
-		    }
-		});
-    }
-    
-    /**
-     * <p>
      * Updates the provisioned throughput for the given table.
      * </p>
      * <p>
@@ -404,42 +549,6 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
         return executorService.submit(new Callable<UpdateTableResult>() {
             public UpdateTableResult call() throws Exception {
                 return updateTable(updateTableRequest);
-		    }
-		});
-    }
-    
-    /**
-     * <p>
-     * Creates a new item, or replaces an old item with a new item (including
-     * all the attributes).
-     * </p>
-     * <p>
-     * If an item already exists in the specified table with the same primary
-     * key, the new item completely replaces the existing item. You can
-     * perform a conditional put (insert a new item if one with the specified
-     * primary key doesn't exist), or replace an existing item if it has
-     * certain attribute values.
-     * </p>
-     *
-     * @param putItemRequest Container for the necessary parameters to
-     *           execute the PutItem operation on AmazonDynamoDB.
-     * 
-     * @return A Java Future object containing the response from the PutItem
-     *         service method, as returned by AmazonDynamoDB.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonDynamoDB indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<PutItemResult> putItemAsync(final PutItemRequest putItemRequest) 
-            throws AmazonServiceException, AmazonClientException {
-        return executorService.submit(new Callable<PutItemResult>() {
-            public PutItemResult call() throws Exception {
-                return putItem(putItemRequest);
 		    }
 		});
     }
@@ -507,39 +616,6 @@ public class AmazonDynamoDBAsyncClient extends AmazonDynamoDBClient
         return executorService.submit(new Callable<DeleteItemResult>() {
             public DeleteItemResult call() throws Exception {
                 return deleteItem(deleteItemRequest);
-		    }
-		});
-    }
-    
-    /**
-     * <p>
-     * Retrieves information about the table, including the current status of
-     * the table, the primary key schema and when the table was created.
-     * </p>
-     * <p>
-     * If the table does not exist, Amazon DynamoDB returns a
-     * <code>ResourceNotFoundException</code> .
-     * </p>
-     *
-     * @param describeTableRequest Container for the necessary parameters to
-     *           execute the DescribeTable operation on AmazonDynamoDB.
-     * 
-     * @return A Java Future object containing the response from the
-     *         DescribeTable service method, as returned by AmazonDynamoDB.
-     *
-     * @throws AmazonClientException
-     *             If any internal errors are encountered inside the client while
-     *             attempting to make the request or handle the response.  For example
-     *             if a network connection is not available.
-     * @throws AmazonServiceException
-     *             If an error response is returned by AmazonDynamoDB indicating
-     *             either a problem with the data in the request, or a server side issue.
-     */
-    public Future<DescribeTableResult> describeTableAsync(final DescribeTableRequest describeTableRequest) 
-            throws AmazonServiceException, AmazonClientException {
-        return executorService.submit(new Callable<DescribeTableResult>() {
-            public DescribeTableResult call() throws Exception {
-                return describeTable(describeTableRequest);
 		    }
 		});
     }

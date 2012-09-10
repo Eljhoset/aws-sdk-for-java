@@ -18,59 +18,41 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.ec2.AmazonEC2#describeInstanceStatus(DescribeInstanceStatusRequest) DescribeInstanceStatus operation}.
  * <p>
- * Describes the status of an Amazon Elastic Compute Cloud (Amazon EC2)
- * instance. Instance status provides information about two types of
- * scheduled events for an instance that may require your attention:
+ * Describes the status of an Amazon Elastic Compute Cloud (Amazon EC2) instance. Instance status provides information about two types of scheduled
+ * events for an instance that may require your attention:
  * </p>
  * 
  * <ul>
- * <li> Scheduled Reboot: When Amazon EC2 determines that an instance
- * must be rebooted, the instance's status will return one of two event
- * codes: <code>system-reboot</code> or <code>instance-reboot</code> .
- * System reboot commonly occurs if certain maintenance or upgrade
- * operations require a reboot of the underlying host that supports an
- * instance. Instance reboot commonly occurs if the instance must be
- * rebooted, rather than the underlying host. Rebooting events include a
- * scheduled start and end time. </li>
- * <li> Scheduled Retirement: When Amazon EC2 determines that an
- * instance must be shut down, the instance's status will return an event
- * code called <code>instance-retirement</code> . Retirement commonly
- * occurs when the underlying host is degraded and must be replaced.
- * Retirement events include a scheduled start and end time. You're also
- * notified by email if one of your instances is set to retiring. The
- * email message indicates when your instance will be permanently
- * retired. </li>
+ * <li> Scheduled Reboot: When Amazon EC2 determines that an instance must be rebooted, the instance's status will return one of two event codes:
+ * <code>system-reboot</code> or <code>instance-reboot</code> . System reboot commonly occurs if certain maintenance or upgrade operations require a
+ * reboot of the underlying host that supports an instance. Instance reboot commonly occurs if the instance must be rebooted, rather than the underlying
+ * host. Rebooting events include a scheduled start and end time. </li>
+ * <li> Scheduled Retirement: When Amazon EC2 determines that an instance must be shut down, the instance's status will return an event code called
+ * <code>instance-retirement</code> . Retirement commonly occurs when the underlying host is degraded and must be replaced. Retirement events include a
+ * scheduled start and end time. You're also notified by email if one of your instances is set to retiring. The email message indicates when your
+ * instance will be permanently retired. </li>
  * 
  * </ul>
  * <p>
- * If your instance is permanently retired, it will not be restarted.
- * You can avoid retirement by manually restarting your instance when its
- * event code is <code>instance-retirement</code> . This ensures that
- * your instance is started on a healthy host.
+ * If your instance is permanently retired, it will not be restarted. You can avoid retirement by manually restarting your instance when its event code
+ * is <code>instance-retirement</code> . This ensures that your instance is started on a healthy host.
  * </p>
  * <p>
- * <code>DescribeInstanceStatus</code> returns information only for
- * instances in the running state.
+ * <code>DescribeInstanceStatus</code> returns information only for instances in the running state.
  * </p>
  * <p>
- * You can filter the results to return information only about instances
- * that match criteria you specify. For example, you could get
- * information about instances in a specific Availability Zone. You can
- * specify multiple values for a filter (e.g., more than one Availability
- * Zone). An instance must match at least one of the specified values for
- * it to be included in the results.
+ * You can filter the results to return information only about instances that match criteria you specify. For example, you could get information about
+ * instances in a specific Availability Zone. You can specify multiple values for a filter (e.g., more than one Availability Zone). An instance must
+ * match at least one of the specified values for it to be included in the results.
  * </p>
  * <p>
- * You can specify multiple filters. An instance must match all the
- * filters for it to be included in the results. If there's no match, no
- * special message is returned; the response is simply empty.
+ * You can specify multiple filters. An instance must match all the filters for it to be included in the results. If there's no match, no special
+ * message is returned; the response is simply empty.
  * </p>
  * <p>
- * You can use wildcards with the filter values: <code>*</code> matches
- * zero or more characters, and <code>?</code> matches exactly one
- * character. You can escape special characters using a backslash before
- * the character. For example, a value of <code>\*amazon\?\\</code>
- * searches for the literal string <code>*amazon?\</code> .
+ * You can use wildcards with the filter values: <code>*</code> matches zero or more characters, and <code>?</code> matches exactly one character. You
+ * can escape special characters using a backslash before the character. For example, a value of <code>\*amazon\?\\</code> searches for the literal
+ * string <code>*amazon?\</code> .
  * 
  * </p>
  * <p>
@@ -78,12 +60,9 @@ import com.amazonaws.AmazonWebServiceRequest;
  * </p>
  * 
  * <ul>
- * <li> <code>availability-zone</code> - Filter on an instance's
- * availability zone. </li>
- * <li> <code>instance-state-name</code> - Filter on the intended state
- * of the instance, e.g., running. </li>
- * <li> <code>instance-state-code</code> - Filter on the intended state
- * code of the instance, e.g., 16. </li>
+ * <li> <code>availability-zone</code> - Filter on an instance's availability zone. </li>
+ * <li> <code>instance-state-name</code> - Filter on the intended state of the instance, e.g., running. </li>
+ * <li> <code>instance-state-code</code> - Filter on the intended state code of the instance, e.g., 16. </li>
  * 
  * </ul>
  *
@@ -111,6 +90,8 @@ public class DescribeInstanceStatusRequest extends AmazonWebServiceRequest {
      * The maximum number of paginated instance items per response.
      */
     private Integer maxResults;
+
+    private Boolean includeAllInstances;
 
     /**
      * The list of instance IDs. If not specified, all instances are
@@ -327,6 +308,49 @@ public class DescribeInstanceStatusRequest extends AmazonWebServiceRequest {
     
     
     /**
+     * Returns the value of the IncludeAllInstances property for this object.
+     *
+     * @return The value of the IncludeAllInstances property for this object.
+     */
+    public Boolean isIncludeAllInstances() {
+        return includeAllInstances;
+    }
+    
+    /**
+     * Sets the value of the IncludeAllInstances property for this object.
+     *
+     * @param includeAllInstances The new value for the IncludeAllInstances property for this object.
+     */
+    public void setIncludeAllInstances(Boolean includeAllInstances) {
+        this.includeAllInstances = includeAllInstances;
+    }
+    
+    /**
+     * Sets the value of the IncludeAllInstances property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param includeAllInstances The new value for the IncludeAllInstances property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DescribeInstanceStatusRequest withIncludeAllInstances(Boolean includeAllInstances) {
+        this.includeAllInstances = includeAllInstances;
+        return this;
+    }
+    
+    
+    /**
+     * Returns the value of the IncludeAllInstances property for this object.
+     *
+     * @return The value of the IncludeAllInstances property for this object.
+     */
+    public Boolean getIncludeAllInstances() {
+        return includeAllInstances;
+    }
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -342,6 +366,7 @@ public class DescribeInstanceStatusRequest extends AmazonWebServiceRequest {
         if (filters != null) sb.append("Filters: " + filters + ", ");
         if (nextToken != null) sb.append("NextToken: " + nextToken + ", ");
         if (maxResults != null) sb.append("MaxResults: " + maxResults + ", ");
+        if (includeAllInstances != null) sb.append("IncludeAllInstances: " + includeAllInstances + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -355,6 +380,7 @@ public class DescribeInstanceStatusRequest extends AmazonWebServiceRequest {
         hashCode = prime * hashCode + ((getFilters() == null) ? 0 : getFilters().hashCode()); 
         hashCode = prime * hashCode + ((getNextToken() == null) ? 0 : getNextToken().hashCode()); 
         hashCode = prime * hashCode + ((getMaxResults() == null) ? 0 : getMaxResults().hashCode()); 
+        hashCode = prime * hashCode + ((isIncludeAllInstances() == null) ? 0 : isIncludeAllInstances().hashCode()); 
         return hashCode;
     }
     
@@ -374,6 +400,8 @@ public class DescribeInstanceStatusRequest extends AmazonWebServiceRequest {
         if (other.getNextToken() != null && other.getNextToken().equals(this.getNextToken()) == false) return false; 
         if (other.getMaxResults() == null ^ this.getMaxResults() == null) return false;
         if (other.getMaxResults() != null && other.getMaxResults().equals(this.getMaxResults()) == false) return false; 
+        if (other.isIncludeAllInstances() == null ^ this.isIncludeAllInstances() == null) return false;
+        if (other.isIncludeAllInstances() != null && other.isIncludeAllInstances().equals(this.isIncludeAllInstances()) == false) return false; 
         return true;
     }
     

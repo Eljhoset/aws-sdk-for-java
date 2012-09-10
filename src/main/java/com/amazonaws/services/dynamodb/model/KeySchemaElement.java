@@ -16,8 +16,7 @@ package com.amazonaws.services.dynamodb.model;
 
 /**
  * <p>
- * <code>KeySchemaElement</code> is the primary key (hash or
- * hash-and-range) structure for the table.
+ * <code>KeySchemaElement</code> is the primary key (hash or hash-and-range) structure for the table.
  * </p>
  */
 public class KeySchemaElement {
@@ -35,7 +34,7 @@ public class KeySchemaElement {
      * which can be a <code>String</code> or a <code>Number</code>.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      */
     private String attributeType;
 
@@ -93,7 +92,7 @@ public class KeySchemaElement {
      * which can be a <code>String</code> or a <code>Number</code>.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      *
      * @return The <code>AttributeType</code> of the <code>KeySchemaElement</code>
      *         which can be a <code>String</code> or a <code>Number</code>.
@@ -109,7 +108,7 @@ public class KeySchemaElement {
      * which can be a <code>String</code> or a <code>Number</code>.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      *
      * @param attributeType The <code>AttributeType</code> of the <code>KeySchemaElement</code>
      *         which can be a <code>String</code> or a <code>Number</code>.
@@ -127,7 +126,7 @@ public class KeySchemaElement {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      *
      * @param attributeType The <code>AttributeType</code> of the <code>KeySchemaElement</code>
      *         which can be a <code>String</code> or a <code>Number</code>.
@@ -148,7 +147,7 @@ public class KeySchemaElement {
      * which can be a <code>String</code> or a <code>Number</code>.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      *
      * @param attributeType The <code>AttributeType</code> of the <code>KeySchemaElement</code>
      *         which can be a <code>String</code> or a <code>Number</code>.
@@ -166,7 +165,7 @@ public class KeySchemaElement {
      * Returns a reference to this object so that method calls can be chained together.
      * <p>
      * <b>Constraints:</b><br/>
-     * <b>Allowed Values: </b>S, N
+     * <b>Allowed Values: </b>S, N, B
      *
      * @param attributeType The <code>AttributeType</code> of the <code>KeySchemaElement</code>
      *         which can be a <code>String</code> or a <code>Number</code>.

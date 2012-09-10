@@ -34,6 +34,9 @@ public class PendingTaskCountJsonUnmarshaller implements Unmarshaller<PendingTas
 
     public PendingTaskCount unmarshall(JsonUnmarshallerContext context) throws Exception {
         PendingTaskCount pendingTaskCount = new PendingTaskCount();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class PendingTaskCountJsonUnmarshaller implements Unmarshaller<PendingTas
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return pendingTaskCount;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("count", targetDepth)) {
                     context.nextToken();
@@ -53,12 +57,14 @@ public class PendingTaskCountJsonUnmarshaller implements Unmarshaller<PendingTas
                     pendingTaskCount.setTruncated(BooleanJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return pendingTaskCount;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return pendingTaskCount;
     }
 
     private static PendingTaskCountJsonUnmarshaller instance;

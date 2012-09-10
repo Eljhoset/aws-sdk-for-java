@@ -16,16 +16,16 @@ package com.amazonaws.services.dynamodb.model;
 
 /**
  * <p>
- * Specifies the attribute to update and how to perform the update.
- * Possible values: <code>PUT</code> (default), <code>ADD</code> or
- * <code>DELETE</code> .
+ * Specifies the attribute to update and how to perform the update. Possible values: <code>PUT</code> (default), <code>ADD</code> or <code>DELETE</code>
+ * .
  * </p>
  */
 public class AttributeValueUpdate {
 
     /**
      * AttributeValue can be <code>String</code>, <code>Number</code>,
-     * <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     * <code>BinarySet</code>.
      */
     private AttributeValue value;
 
@@ -56,7 +56,8 @@ public class AttributeValueUpdate {
      * initialize any additional object members.
      * 
      * @param value AttributeValue can be <code>String</code>,
-     * <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Number</code>, <code>Binary</code>, <code>StringSet</code>,
+     * <code>NumberSet</code>, <code>BinarySet</code>.
      * @param action The type of action for an item update operation. Only
      * use the add action for numbers or sets; the specified value is added
      * to the existing value. If a set of values is specified, the values are
@@ -79,7 +80,8 @@ public class AttributeValueUpdate {
      * initialize any additional object members.
      * 
      * @param value AttributeValue can be <code>String</code>,
-     * <code>Number</code>, <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Number</code>, <code>Binary</code>, <code>StringSet</code>,
+     * <code>NumberSet</code>, <code>BinarySet</code>.
      * @param action The type of action for an item update operation. Only
      * use the add action for numbers or sets; the specified value is added
      * to the existing value. If a set of values is specified, the values are
@@ -96,10 +98,12 @@ public class AttributeValueUpdate {
     
     /**
      * AttributeValue can be <code>String</code>, <code>Number</code>,
-     * <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     * <code>BinarySet</code>.
      *
      * @return AttributeValue can be <code>String</code>, <code>Number</code>,
-     *         <code>StringSet</code>, <code>NumberSet</code>.
+     *         <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     *         <code>BinarySet</code>.
      */
     public AttributeValue getValue() {
         return value;
@@ -107,10 +111,12 @@ public class AttributeValueUpdate {
     
     /**
      * AttributeValue can be <code>String</code>, <code>Number</code>,
-     * <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     * <code>BinarySet</code>.
      *
      * @param value AttributeValue can be <code>String</code>, <code>Number</code>,
-     *         <code>StringSet</code>, <code>NumberSet</code>.
+     *         <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     *         <code>BinarySet</code>.
      */
     public void setValue(AttributeValue value) {
         this.value = value;
@@ -118,12 +124,14 @@ public class AttributeValueUpdate {
     
     /**
      * AttributeValue can be <code>String</code>, <code>Number</code>,
-     * <code>StringSet</code>, <code>NumberSet</code>.
+     * <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     * <code>BinarySet</code>.
      * <p>
      * Returns a reference to this object so that method calls can be chained together.
      *
      * @param value AttributeValue can be <code>String</code>, <code>Number</code>,
-     *         <code>StringSet</code>, <code>NumberSet</code>.
+     *         <code>Binary</code>, <code>StringSet</code>, <code>NumberSet</code>,
+     *         <code>BinarySet</code>.
      *
      * @return A reference to this updated object so that method calls can be chained 
      *         together. 

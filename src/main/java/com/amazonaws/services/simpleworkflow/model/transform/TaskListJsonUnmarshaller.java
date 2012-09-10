@@ -34,6 +34,9 @@ public class TaskListJsonUnmarshaller implements Unmarshaller<TaskList, JsonUnma
 
     public TaskList unmarshall(JsonUnmarshallerContext context) throws Exception {
         TaskList taskList = new TaskList();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,20 +44,23 @@ public class TaskListJsonUnmarshaller implements Unmarshaller<TaskList, JsonUnma
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return taskList;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("name", targetDepth)) {
                     context.nextToken();
                     taskList.setName(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return taskList;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return taskList;
     }
 
     private static TaskListJsonUnmarshaller instance;

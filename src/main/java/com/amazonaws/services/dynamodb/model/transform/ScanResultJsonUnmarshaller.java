@@ -34,6 +34,9 @@ public class ScanResultJsonUnmarshaller implements Unmarshaller<ScanResult, Json
 
     public ScanResult unmarshall(JsonUnmarshallerContext context) throws Exception {
         ScanResult scanResult = new ScanResult();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class ScanResultJsonUnmarshaller implements Unmarshaller<ScanResult, Json
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return scanResult;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("Items", targetDepth)) {
                     scanResult.setItems(new ListUnmarshaller<java.util.Map<String,AttributeValue>>(new MapUnmarshaller<String,AttributeValue>(StringJsonUnmarshaller.getInstance(), AttributeValueJsonUnmarshaller.getInstance())).unmarshall(context));
@@ -64,12 +68,14 @@ public class ScanResultJsonUnmarshaller implements Unmarshaller<ScanResult, Json
                     scanResult.setConsumedCapacityUnits(DoubleJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return scanResult;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return scanResult;
     }
 
     private static ScanResultJsonUnmarshaller instance;

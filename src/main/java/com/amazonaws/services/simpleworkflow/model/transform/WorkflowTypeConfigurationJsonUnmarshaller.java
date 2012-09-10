@@ -34,6 +34,9 @@ public class WorkflowTypeConfigurationJsonUnmarshaller implements Unmarshaller<W
 
     public WorkflowTypeConfiguration unmarshall(JsonUnmarshallerContext context) throws Exception {
         WorkflowTypeConfiguration workflowTypeConfiguration = new WorkflowTypeConfiguration();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class WorkflowTypeConfigurationJsonUnmarshaller implements Unmarshaller<W
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return workflowTypeConfiguration;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("defaultTaskStartToCloseTimeout", targetDepth)) {
                     context.nextToken();
@@ -61,12 +65,14 @@ public class WorkflowTypeConfigurationJsonUnmarshaller implements Unmarshaller<W
                     workflowTypeConfiguration.setDefaultChildPolicy(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return workflowTypeConfiguration;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return workflowTypeConfiguration;
     }
 
     private static WorkflowTypeConfigurationJsonUnmarshaller instance;

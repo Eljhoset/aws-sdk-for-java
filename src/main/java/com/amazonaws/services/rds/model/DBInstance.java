@@ -16,8 +16,7 @@ package com.amazonaws.services.rds.model;
 
 /**
  * <p>
- * Contains the result of a successful invocation of the following
- * actions:
+ * Contains the result of a successful invocation of the following actions:
  * </p>
  * 
  * <ul>
@@ -27,8 +26,7 @@ package com.amazonaws.services.rds.model;
  * 
  * </ul>
  * <p>
- * This data type is used as a response element in the
- * DescribeDBInstances action.
+ * This data type is used as a response element in the DescribeDBInstances action.
  * </p>
  */
 public class DBInstance {
@@ -174,6 +172,18 @@ public class DBInstance {
      * License model information for this DB Instance.
      */
     private String licenseModel;
+
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     */
+    private OptionGroupMembership optionGroupMembership;
+
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     */
+    private String characterSetName;
 
     /**
      * Contains a user-supplied database identifier. This is the unique key
@@ -1253,6 +1263,86 @@ public class DBInstance {
     
     
     /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     *
+     * @return Specifies the name and status of the option group that this instance
+     *         belongs to.
+     */
+    public OptionGroupMembership getOptionGroupMembership() {
+        return optionGroupMembership;
+    }
+    
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     *
+     * @param optionGroupMembership Specifies the name and status of the option group that this instance
+     *         belongs to.
+     */
+    public void setOptionGroupMembership(OptionGroupMembership optionGroupMembership) {
+        this.optionGroupMembership = optionGroupMembership;
+    }
+    
+    /**
+     * Specifies the name and status of the option group that this instance
+     * belongs to.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param optionGroupMembership Specifies the name and status of the option group that this instance
+     *         belongs to.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DBInstance withOptionGroupMembership(OptionGroupMembership optionGroupMembership) {
+        this.optionGroupMembership = optionGroupMembership;
+        return this;
+    }
+    
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     *
+     * @return If present, specifies the name of the character set that this instance
+     *         is associated with.
+     */
+    public String getCharacterSetName() {
+        return characterSetName;
+    }
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     *
+     * @param characterSetName If present, specifies the name of the character set that this instance
+     *         is associated with.
+     */
+    public void setCharacterSetName(String characterSetName) {
+        this.characterSetName = characterSetName;
+    }
+    
+    /**
+     * If present, specifies the name of the character set that this instance
+     * is associated with.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param characterSetName If present, specifies the name of the character set that this instance
+     *         is associated with.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public DBInstance withCharacterSetName(String characterSetName) {
+        this.characterSetName = characterSetName;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -1288,6 +1378,8 @@ public class DBInstance {
         if (readReplicaSourceDBInstanceIdentifier != null) sb.append("ReadReplicaSourceDBInstanceIdentifier: " + readReplicaSourceDBInstanceIdentifier + ", ");
         if (readReplicaDBInstanceIdentifiers != null) sb.append("ReadReplicaDBInstanceIdentifiers: " + readReplicaDBInstanceIdentifiers + ", ");
         if (licenseModel != null) sb.append("LicenseModel: " + licenseModel + ", ");
+        if (optionGroupMembership != null) sb.append("OptionGroupMembership: " + optionGroupMembership + ", ");
+        if (characterSetName != null) sb.append("CharacterSetName: " + characterSetName + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -1321,6 +1413,8 @@ public class DBInstance {
         hashCode = prime * hashCode + ((getReadReplicaSourceDBInstanceIdentifier() == null) ? 0 : getReadReplicaSourceDBInstanceIdentifier().hashCode()); 
         hashCode = prime * hashCode + ((getReadReplicaDBInstanceIdentifiers() == null) ? 0 : getReadReplicaDBInstanceIdentifiers().hashCode()); 
         hashCode = prime * hashCode + ((getLicenseModel() == null) ? 0 : getLicenseModel().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionGroupMembership() == null) ? 0 : getOptionGroupMembership().hashCode()); 
+        hashCode = prime * hashCode + ((getCharacterSetName() == null) ? 0 : getCharacterSetName().hashCode()); 
         return hashCode;
     }
     
@@ -1380,6 +1474,10 @@ public class DBInstance {
         if (other.getReadReplicaDBInstanceIdentifiers() != null && other.getReadReplicaDBInstanceIdentifiers().equals(this.getReadReplicaDBInstanceIdentifiers()) == false) return false; 
         if (other.getLicenseModel() == null ^ this.getLicenseModel() == null) return false;
         if (other.getLicenseModel() != null && other.getLicenseModel().equals(this.getLicenseModel()) == false) return false; 
+        if (other.getOptionGroupMembership() == null ^ this.getOptionGroupMembership() == null) return false;
+        if (other.getOptionGroupMembership() != null && other.getOptionGroupMembership().equals(this.getOptionGroupMembership()) == false) return false; 
+        if (other.getCharacterSetName() == null ^ this.getCharacterSetName() == null) return false;
+        if (other.getCharacterSetName() != null && other.getCharacterSetName().equals(this.getCharacterSetName()) == false) return false; 
         return true;
     }
     

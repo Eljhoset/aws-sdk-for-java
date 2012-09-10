@@ -34,6 +34,9 @@ public class DecisionTaskStartedEventAttributesJsonUnmarshaller implements Unmar
 
     public DecisionTaskStartedEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         DecisionTaskStartedEventAttributes decisionTaskStartedEventAttributes = new DecisionTaskStartedEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class DecisionTaskStartedEventAttributesJsonUnmarshaller implements Unmar
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return decisionTaskStartedEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("identity", targetDepth)) {
                     context.nextToken();
@@ -53,12 +57,14 @@ public class DecisionTaskStartedEventAttributesJsonUnmarshaller implements Unmar
                     decisionTaskStartedEventAttributes.setScheduledEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return decisionTaskStartedEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return decisionTaskStartedEventAttributes;
     }
 
     private static DecisionTaskStartedEventAttributesJsonUnmarshaller instance;

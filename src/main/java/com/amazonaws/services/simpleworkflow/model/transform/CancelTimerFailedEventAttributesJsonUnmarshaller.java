@@ -34,6 +34,9 @@ public class CancelTimerFailedEventAttributesJsonUnmarshaller implements Unmarsh
 
     public CancelTimerFailedEventAttributes unmarshall(JsonUnmarshallerContext context) throws Exception {
         CancelTimerFailedEventAttributes cancelTimerFailedEventAttributes = new CancelTimerFailedEventAttributes();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class CancelTimerFailedEventAttributesJsonUnmarshaller implements Unmarsh
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return cancelTimerFailedEventAttributes;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("timerId", targetDepth)) {
                     context.nextToken();
@@ -57,12 +61,14 @@ public class CancelTimerFailedEventAttributesJsonUnmarshaller implements Unmarsh
                     cancelTimerFailedEventAttributes.setDecisionTaskCompletedEventId(LongJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return cancelTimerFailedEventAttributes;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return cancelTimerFailedEventAttributes;
     }
 
     private static CancelTimerFailedEventAttributesJsonUnmarshaller instance;

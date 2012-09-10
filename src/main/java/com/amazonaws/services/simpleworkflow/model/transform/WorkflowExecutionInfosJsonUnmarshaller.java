@@ -34,6 +34,9 @@ public class WorkflowExecutionInfosJsonUnmarshaller implements Unmarshaller<Work
 
     public WorkflowExecutionInfos unmarshall(JsonUnmarshallerContext context) throws Exception {
         WorkflowExecutionInfos workflowExecutionInfos = new WorkflowExecutionInfos();
+
+        
+        
         int originalDepth = context.getCurrentDepth();
         int targetDepth = originalDepth + 1;
 
@@ -41,8 +44,9 @@ public class WorkflowExecutionInfosJsonUnmarshaller implements Unmarshaller<Work
         if (token == null) token = context.nextToken();
 
         while (true) {
-            if (token == null) return workflowExecutionInfos;
+            if (token == null) break;
 
+            
             if (token == FIELD_NAME || token == START_OBJECT) {
                 if (context.testExpression("executionInfos", targetDepth)) {
                     workflowExecutionInfos.setExecutionInfos(new ListUnmarshaller<WorkflowExecutionInfo>(WorkflowExecutionInfoJsonUnmarshaller.getInstance()).unmarshall(context));
@@ -52,12 +56,14 @@ public class WorkflowExecutionInfosJsonUnmarshaller implements Unmarshaller<Work
                     workflowExecutionInfos.setNextPageToken(StringJsonUnmarshaller.getInstance().unmarshall(context));
                 }
             } else if (token == END_ARRAY || token == END_OBJECT) {
-                if (context.getCurrentDepth() <= originalDepth) {
-                    return workflowExecutionInfos;
-                }
+                if (context.getCurrentDepth() <= originalDepth) break;
             }
+            
+
             token = context.nextToken();
         }
+        
+        return workflowExecutionInfos;
     }
 
     private static WorkflowExecutionInfosJsonUnmarshaller instance;

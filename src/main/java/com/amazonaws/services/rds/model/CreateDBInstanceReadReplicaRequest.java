@@ -18,18 +18,14 @@ import com.amazonaws.AmazonWebServiceRequest;
 /**
  * Container for the parameters to the {@link com.amazonaws.services.rds.AmazonRDS#createDBInstanceReadReplica(CreateDBInstanceReadReplicaRequest) CreateDBInstanceReadReplica operation}.
  * <p>
- * Creates a DB Instance that acts as a Read Replica of a source DB
- * Instance.
+ * Creates a DB Instance that acts as a Read Replica of a source DB Instance.
  * </p>
  * <p>
- * All Read Replica DB Instances are created as Single-AZ deployments
- * with backups disabled. All other DB Instance attributes (including DB
- * Security Groups and DB Parameter Groups) are inherited from the source
- * DB Instance, except as specified below.
+ * All Read Replica DB Instances are created as Single-AZ deployments with backups disabled. All other DB Instance attributes (including DB Security
+ * Groups and DB Parameter Groups) are inherited from the source DB Instance, except as specified below.
  * </p>
  * <p>
- * <b>IMPORTANT:</b> The source DB Instance must have backup retention
- * enabled.
+ * <b>IMPORTANT:</b> The source DB Instance must have backup retention enabled.
  * </p>
  *
  * @see com.amazonaws.services.rds.AmazonRDS#createDBInstanceReadReplica(CreateDBInstanceReadReplicaRequest)
@@ -79,6 +75,8 @@ public class CreateDBInstanceReadReplicaRequest extends AmazonWebServiceRequest 
      * from the source DB Instance
      */
     private Boolean autoMinorVersionUpgrade;
+
+    private String optionGroupName;
 
     /**
      * Default constructor for a new CreateDBInstanceReadReplicaRequest object.  Callers should use the
@@ -409,6 +407,40 @@ public class CreateDBInstanceReadReplicaRequest extends AmazonWebServiceRequest 
     }
     
     /**
+     * Returns the value of the OptionGroupName property for this object.
+     *
+     * @return The value of the OptionGroupName property for this object.
+     */
+    public String getOptionGroupName() {
+        return optionGroupName;
+    }
+    
+    /**
+     * Sets the value of the OptionGroupName property for this object.
+     *
+     * @param optionGroupName The new value for the OptionGroupName property for this object.
+     */
+    public void setOptionGroupName(String optionGroupName) {
+        this.optionGroupName = optionGroupName;
+    }
+    
+    /**
+     * Sets the value of the OptionGroupName property for this object.
+     * <p>
+     * Returns a reference to this object so that method calls can be chained together.
+     *
+     * @param optionGroupName The new value for the OptionGroupName property for this object.
+     *
+     * @return A reference to this updated object so that method calls can be chained 
+     *         together. 
+     */
+    public CreateDBInstanceReadReplicaRequest withOptionGroupName(String optionGroupName) {
+        this.optionGroupName = optionGroupName;
+        return this;
+    }
+    
+    
+    /**
      * Returns a string representation of this object; useful for testing and
      * debugging.
      *
@@ -426,6 +458,7 @@ public class CreateDBInstanceReadReplicaRequest extends AmazonWebServiceRequest 
         if (availabilityZone != null) sb.append("AvailabilityZone: " + availabilityZone + ", ");
         if (port != null) sb.append("Port: " + port + ", ");
         if (autoMinorVersionUpgrade != null) sb.append("AutoMinorVersionUpgrade: " + autoMinorVersionUpgrade + ", ");
+        if (optionGroupName != null) sb.append("OptionGroupName: " + optionGroupName + ", ");
         sb.append("}");
         return sb.toString();
     }
@@ -441,6 +474,7 @@ public class CreateDBInstanceReadReplicaRequest extends AmazonWebServiceRequest 
         hashCode = prime * hashCode + ((getAvailabilityZone() == null) ? 0 : getAvailabilityZone().hashCode()); 
         hashCode = prime * hashCode + ((getPort() == null) ? 0 : getPort().hashCode()); 
         hashCode = prime * hashCode + ((isAutoMinorVersionUpgrade() == null) ? 0 : isAutoMinorVersionUpgrade().hashCode()); 
+        hashCode = prime * hashCode + ((getOptionGroupName() == null) ? 0 : getOptionGroupName().hashCode()); 
         return hashCode;
     }
     
@@ -464,6 +498,8 @@ public class CreateDBInstanceReadReplicaRequest extends AmazonWebServiceRequest 
         if (other.getPort() != null && other.getPort().equals(this.getPort()) == false) return false; 
         if (other.isAutoMinorVersionUpgrade() == null ^ this.isAutoMinorVersionUpgrade() == null) return false;
         if (other.isAutoMinorVersionUpgrade() != null && other.isAutoMinorVersionUpgrade().equals(this.isAutoMinorVersionUpgrade()) == false) return false; 
+        if (other.getOptionGroupName() == null ^ this.getOptionGroupName() == null) return false;
+        if (other.getOptionGroupName() != null && other.getOptionGroupName().equals(this.getOptionGroupName()) == false) return false; 
         return true;
     }
     

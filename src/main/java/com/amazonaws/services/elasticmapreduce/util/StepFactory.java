@@ -15,6 +15,7 @@
 package com.amazonaws.services.elasticmapreduce.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.amazonaws.services.elasticmapreduce.model.HadoopJarStepConfig;
@@ -71,7 +72,8 @@ public class StepFactory {
     public static enum HiveVersion {
     	Hive_0_5("0.5"),
     	Hive_0_7("0.7"),
-    	Hive_0_7_1("0.7.1");
+    	Hive_0_7_1("0.7.1"),
+    	Hive_Latest("latest");
 
       private String stringVal;
 
@@ -145,14 +147,14 @@ public class StepFactory {
      * @return HadoopJarStepConfig that can be passed to your job flow.
      */
     public HadoopJarStepConfig newInstallHiveStep(HiveVersion... hiveVersions) {
-    	if (hiveVersions.length > 0) {
-        String[] versionStrings = new String[hiveVersions.length];
-        for (int i = 0; i < hiveVersions.length; i++) {
-          versionStrings[i] = hiveVersions[i].toString();
+        if (hiveVersions.length > 0) {
+            String[] versionStrings = new String[hiveVersions.length];
+            for (int i = 0; i < hiveVersions.length; i++) {
+                versionStrings[i] = hiveVersions[i].toString();
+            }
+            return newInstallHiveStep(versionStrings);
         }
-        return newInstallHiveStep(versionStrings);
-    	}
-    	return newHivePigStep("hive", "--install-hive");
+        return newHivePigStep("hive", "--install-hive", "--hive-versions", "latest");
     }
     
     /**
@@ -166,7 +168,7 @@ public class StepFactory {
         return newHivePigStep("hive", "--install-hive", "--hive-versions",
                 StringUtils.join(",", hiveVersions));
       }
-      return newHivePigStep("hive", "--install-hive");
+      return newHivePigStep("hive", "--install-hive", "--hive-versions", "latest");
     }
 
     /**
@@ -180,7 +182,31 @@ public class StepFactory {
     }
 
     /**
-     * Step that runs a Hive script on your job flow.
+     * Step that runs a Hive script on your job flow using the specified Hive version.
+     *
+     * @param script
+     *            The script to run.
+     * @param hiveVersion
+     *            The Hive version to use.
+     * @param scriptArgs
+     *            Arguments that get passed to the script.
+     * @return HadoopJarStepConfig that can be passed to your job flow.
+     */
+    public HadoopJarStepConfig newRunHiveScriptStepVersioned(String script, 
+        String hiveVersion, String... scriptArgs) {
+        List<String> hiveArgs = new ArrayList<String>();
+        hiveArgs.add("--hive-versions");
+        hiveArgs.add(hiveVersion);
+        hiveArgs.add("--run-hive-script");
+        hiveArgs.add("--args");
+        hiveArgs.add("-f");
+        hiveArgs.add(script);
+        hiveArgs.addAll(Arrays.asList(scriptArgs));
+        return newHivePigStep("hive", hiveArgs.toArray(new String[0]));
+    }
+    
+    /**
+     * Step that runs a Hive script on your job flow using the default Hive version.
      *
      * @param script
      *            The script to run.
@@ -189,49 +215,76 @@ public class StepFactory {
      * @return HadoopJarStepConfig that can be passed to your job flow.
      */
     public HadoopJarStepConfig newRunHiveScriptStep(String script, String... args) {
-        String[] argsArray = new String[args.length + 4];
-        argsArray[0] = "--run-hive-script";
-        argsArray[1] = "--args";
-        argsArray[2] = "-f";
-        argsArray[3] = script;
-        System.arraycopy(args, 0, argsArray, 4, args.length);
-        return newHivePigStep("hive", argsArray);
+        return newRunHiveScriptStepVersioned(script, "latest", args);
     }
 
     /**
-     * Step that installs Pig on your job flow.
+     * Step that installs the default version of Pig on your job flow.
      *
      * @return HadoopJarStepConfig that can be passed to your job flow.
      */
     public HadoopJarStepConfig newInstallPigStep() {
-        return newHivePigStep("pig", "--install-pig");
+        return newInstallPigStep(new String[0]);
+    }
+    
+    /**
+     * Step that installs Pig on your job flow.
+     *
+     * @param pigVersions the versions of Pig to install.
+     * 
+     * @return HadoopJarStepConfig that can be passed to your job flow.
+     */
+    public HadoopJarStepConfig newInstallPigStep(String... pigVersions) {
+        if (pigVersions != null && pigVersions.length > 0) {
+            return newHivePigStep("pig", "--install-pig", "--pig-versions",
+                    StringUtils.join(",", pigVersions));
+        }
+        return newHivePigStep("pig", "--install-pig", "--pig-versions", "latest");
     }
 
     /**
-     * Step that runs a Pig script on your job flow.
+     * Step that runs a Pig script on your job flow using the specified Pig version.
      *
      * @param script
      *            The script to run.
-     * @param args
+     * @param pigVersion
+     *            The Pig version to use. 
+     * @param scriptArgs
      *            Arguments that get passed to the script.
      * @return HadoopJarStepConfig that can be passed to your job flow.
      */
-    public HadoopJarStepConfig newRunPigScriptStep(String script, String... args) {
-        String[] argsArray = new String[args.length + 4];
-        argsArray[0] = "--run-pig-script";
-        argsArray[1] = "--args";
-        argsArray[2] = "-f";
-        argsArray[3] = script;
-        System.arraycopy(args, 0, argsArray, 4, args.length);
-        return newHivePigStep("pig", argsArray);
+    public HadoopJarStepConfig newRunPigScriptStep(String script, 
+        String pigVersion, String... scriptArgs) {
+        List<String> pigArgs = new ArrayList<String>();
+        pigArgs.add("--pig-versions");
+        pigArgs.add(pigVersion);
+        pigArgs.add("--run-pig-script");
+        pigArgs.add("--args");
+        pigArgs.add("-f");
+        pigArgs.add(script);
+        pigArgs.addAll(Arrays.asList(scriptArgs));
+        return newHivePigStep("pig", pigArgs.toArray(new String[0]));
+    }
+    
+    /**
+     * Step that runs a Pig script on your job flow using the default Pig version.
+     *
+     * @param script
+     *            The script to run.
+     * @param scriptArgs
+     *            Arguments that get passed to the script.
+     * @return HadoopJarStepConfig that can be passed to your job flow.
+     */
+    public HadoopJarStepConfig newRunPigScriptStep(String script, String... scriptArgs) {
+        return newRunPigScriptStep(script, "latest", scriptArgs);
     }
 
     private HadoopJarStepConfig newHivePigStep(String type, String... args) {
-        String[] argsArray = new String[args.length + 2];
-        argsArray[0] = "--base-path";
-        argsArray[1] = "s3://" + bucket + "/libs/" + type + "/";
-        System.arraycopy(args, 0, argsArray, 2, args.length);
-        return newScriptRunnerStep("s3://" + bucket + "/libs/" + type + "/" + type + "-script", argsArray);
+        List<String> appArgs = new ArrayList<String>();
+        appArgs.add("--base-path");
+        appArgs.add("s3://" + bucket + "/libs/" + type + "/");
+        appArgs.addAll(Arrays.asList(args));
+        return newScriptRunnerStep("s3://" + bucket + "/libs/" + type + "/" + type + "-script", appArgs.toArray(new String[0]));
     }
 
 }
