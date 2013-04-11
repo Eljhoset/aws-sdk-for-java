@@ -46,7 +46,7 @@ public class ShutdownGatewayRequestMarshaller implements Marshaller<Request<Shut
 		}
 
         Request<ShutdownGatewayRequest> request = new DefaultRequest<ShutdownGatewayRequest>(shutdownGatewayRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.ShutdownGateway";
+        String target = "StorageGateway_20120630.ShutdownGateway";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class ShutdownGatewayRequestMarshaller implements Marshaller<Request<Shut
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

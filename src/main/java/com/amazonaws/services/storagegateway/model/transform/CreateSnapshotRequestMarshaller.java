@@ -46,7 +46,7 @@ public class CreateSnapshotRequestMarshaller implements Marshaller<Request<Creat
 		}
 
         Request<CreateSnapshotRequest> request = new DefaultRequest<CreateSnapshotRequest>(createSnapshotRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.CreateSnapshot";
+        String target = "StorageGateway_20120630.CreateSnapshot";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class CreateSnapshotRequestMarshaller implements Marshaller<Request<Creat
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

@@ -46,7 +46,7 @@ public class AddWorkingStorageRequestMarshaller implements Marshaller<Request<Ad
 		}
 
         Request<AddWorkingStorageRequest> request = new DefaultRequest<AddWorkingStorageRequest>(addWorkingStorageRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.AddWorkingStorage";
+        String target = "StorageGateway_20120630.AddWorkingStorage";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class AddWorkingStorageRequestMarshaller implements Marshaller<Request<Ad
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
@@ -93,7 +95,9 @@ public class AddWorkingStorageRequestMarshaller implements Marshaller<Request<Ad
                 jsonWriter.array();
 
                 for (String diskIdsListValue : diskIdsList) {
-                    jsonWriter.value(diskIdsListValue);
+                    if (diskIdsListValue != null) {
+                        jsonWriter.value(diskIdsListValue);
+                    }
                 }
                 jsonWriter.endArray();
             }

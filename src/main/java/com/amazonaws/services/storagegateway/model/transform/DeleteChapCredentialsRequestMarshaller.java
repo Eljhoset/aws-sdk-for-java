@@ -46,7 +46,7 @@ public class DeleteChapCredentialsRequestMarshaller implements Marshaller<Reques
 		}
 
         Request<DeleteChapCredentialsRequest> request = new DefaultRequest<DeleteChapCredentialsRequest>(deleteChapCredentialsRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.DeleteChapCredentials";
+        String target = "StorageGateway_20120630.DeleteChapCredentials";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class DeleteChapCredentialsRequestMarshaller implements Marshaller<Reques
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

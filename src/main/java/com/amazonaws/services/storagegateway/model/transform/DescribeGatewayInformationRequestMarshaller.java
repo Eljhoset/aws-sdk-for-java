@@ -46,7 +46,7 @@ public class DescribeGatewayInformationRequestMarshaller implements Marshaller<R
 		}
 
         Request<DescribeGatewayInformationRequest> request = new DefaultRequest<DescribeGatewayInformationRequest>(describeGatewayInformationRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.DescribeGatewayInformation";
+        String target = "StorageGateway_20120630.DescribeGatewayInformation";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class DescribeGatewayInformationRequestMarshaller implements Marshaller<R
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

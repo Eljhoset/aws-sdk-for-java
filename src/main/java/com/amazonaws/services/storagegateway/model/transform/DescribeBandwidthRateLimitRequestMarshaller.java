@@ -46,7 +46,7 @@ public class DescribeBandwidthRateLimitRequestMarshaller implements Marshaller<R
 		}
 
         Request<DescribeBandwidthRateLimitRequest> request = new DefaultRequest<DescribeBandwidthRateLimitRequest>(describeBandwidthRateLimitRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.DescribeBandwidthRateLimit";
+        String target = "StorageGateway_20120630.DescribeBandwidthRateLimit";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class DescribeBandwidthRateLimitRequestMarshaller implements Marshaller<R
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

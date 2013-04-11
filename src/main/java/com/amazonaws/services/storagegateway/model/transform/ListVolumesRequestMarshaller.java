@@ -46,7 +46,7 @@ public class ListVolumesRequestMarshaller implements Marshaller<Request<ListVolu
 		}
 
         Request<ListVolumesRequest> request = new DefaultRequest<ListVolumesRequest>(listVolumesRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.ListVolumes";
+        String target = "StorageGateway_20120630.ListVolumes";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class ListVolumesRequestMarshaller implements Marshaller<Request<ListVolu
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);

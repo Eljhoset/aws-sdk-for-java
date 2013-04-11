@@ -46,7 +46,7 @@ public class DescribeMaintenanceStartTimeRequestMarshaller implements Marshaller
 		}
 
         Request<DescribeMaintenanceStartTimeRequest> request = new DefaultRequest<DescribeMaintenanceStartTimeRequest>(describeMaintenanceStartTimeRequest, "AWSStorageGateway");
-        String target = "StorageGateway_20120430.DescribeMaintenanceStartTime";
+        String target = "StorageGateway_20120630.DescribeMaintenanceStartTime";
         request.addHeader("X-Amz-Target", target);
         request.addHeader("Content-Type", "application/x-amz-json-1.1");
 
@@ -55,6 +55,8 @@ public class DescribeMaintenanceStartTimeRequestMarshaller implements Marshaller
 
 
         String uriResourcePath = ""; 
+        
+        uriResourcePath = uriResourcePath.replaceAll("//", "/");
 
         if (uriResourcePath.contains("?")) {
             String queryString = uriResourcePath.substring(uriResourcePath.indexOf("?") + 1);
